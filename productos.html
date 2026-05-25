@@ -21,8 +21,14 @@
     </nav>
 
     <main>
-
+        <h2 id="saludo"></h2>
     </main>
+
+    <script>
+    const nombre = localStorage.getItem("nombreUsuario");
+    const nombreCapitalizado = nombre.charAt(0).toUpperCase() + nombre.slice(1).toLowerCase();
+    document.getElementById("saludo").textContent = `Hola ${nombreCapitalizado}`;
+    </script>
 
     <script src="app.js"></script>
 

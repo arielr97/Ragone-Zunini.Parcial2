@@ -7,18 +7,23 @@ nav {
     background-color: black;
     color: white;
 
-    padding: 15px;
-
+    padding-left: 20px;
     display: flex;
     gap: 20px;
     align-items: center;
+    
 }
 
 nav a {
-    color: white;
+    color: rgb(255, 255, 255);
+    transition: 0.25s;
     text-decoration: none;
 }
 
+nav a:hover {
+    color: rgb(59, 116, 42);
+}
+
 main {
-    padding: 20px;
+    padding-left: 20px;
 }
