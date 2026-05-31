@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "tipo": "Libro",
+        "nombre": "Clean Code",
+        "autor": "Robert Martin",
+        "precio": 20000,
+        "activo": true
+    },
+    {
+        "id": 2,
+        "tipo": "CD",
+        "nombre": "Thriller",
+        "artista": "Michael Jackson",
+        "precio": 15000,
+        "activo": true
+    },
+    {
+        "id": 3,
+        "tipo": "CD",
+        "nombre": "American Idiot",
+        "artista": "Green Day",
+        "precio": 17000,
+        "activo": true
+    },
+    {
+        "id": 4,
+        "tipo": "Libro",
+        "nombre": "Journey to the Center of the Earth",
+        "autor": "Jules Verne",
+        "precio": 10500,
+        "activo": true
+    },
+        {
+        "id": 5,
+        "tipo": "Libro",
+        "nombre": "Harry Potter and the Philosopher's Stone",
+        "autor": "J. K. Rowling",
+        "precio": 10000,
+        "activo": true
+    },
+    {
+        "id": 6,
+        "tipo": "CD",
+        "nombre": "At Night At The Opera",
+        "artista": "Queen",
+        "precio": 19000,
+        "activo": true
+    }
+]
