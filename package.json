@@ -1,0 +1,26 @@
+{
+  "name": "ragone-zunini.parcial2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arielr97/Ragone-Zunini.Parcial2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/arielr97/Ragone-Zunini.Parcial2/issues"
+  },
+  "homepage": "https://github.com/arielr97/Ragone-Zunini.Parcial2#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}
