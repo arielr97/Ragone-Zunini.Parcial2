@@ -5,7 +5,8 @@
         "nombre": "Clean Code",
         "autor": "Robert Martin",
         "precio": 20000,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/cleancode.jpg"
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "nombre": "Thriller",
         "artista": "Michael Jackson",
         "precio": 15000,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/thriller.jpg"
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "nombre": "American Idiot",
         "artista": "Green Day",
         "precio": 17000,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/greenday1.jpg"
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "nombre": "Journey to the Center of the Earth",
         "autor": "Jules Verne",
         "precio": 10500,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/julioverne1.jpg"
     },
         {
         "id": 5,
@@ -37,14 +41,16 @@
         "nombre": "Harry Potter and the Philosopher's Stone",
         "autor": "J. K. Rowling",
         "precio": 10000,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/harrypotter1.jpg"
     },
     {
         "id": 6,
         "tipo": "CD",
-        "nombre": "At Night At The Opera",
+        "nombre": "A Night At The Opera",
         "artista": "Queen",
         "precio": 19000,
-        "activo": true
+        "activo": true,
+        "img": "http://localhost:3000/img/queen1.jpg"
     }
 ]
