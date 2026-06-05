@@ -1,14 +1,35 @@
-function crearTarjetaProducto(producto) {
-    return `
-        <div class="producto">
-            <h3>${producto.nombre}</h3>
-            <p>Tipo: ${producto.tipo}</p>
-            <img src="${producto.img}" alt="${producto.nombre}">
-            <p>Precio: $${producto.precio}</p>
-            <button type="button" class="btn-guardar">Agregar al carrito</button>
-        </div>
-    `;
+const contenedor = document.getElementById("contenedor-productos");
+
+function crearTarjetaProducto(producto){
+    const tarjeta = document.createElement("div");
+    tarjeta.classList.add("producto");
+    const titulo = document.createElement("h3");
+    titulo.textContent = producto.nombre;
+    const img = document.createElement("img");
+    img.src = producto.img;
+    img.alt = producto.nombre;
+    const precio = document.createElement("p");
+    precio.textContent = `Precio: $${producto.precio}`;
+    const boton = document.createElement("button");
+    boton.textContent = "Agregar al carrito";
+    boton.addEventListener("click", () => {
+        agregarAlCarrito(producto);
+    });
+
+    tarjeta.appendChild(titulo);
+    tarjeta.appendChild(img);
+    tarjeta.appendChild(precio);
+    tarjeta.appendChild(boton);
+
+    return tarjeta;
 }
+
+function agregarAlCarrito(producto){
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
 
 async function traerProductos() {
     try{
@@ -19,8 +40,7 @@ async function traerProductos() {
         }else{
             const productos = await respuesta.json();
             productos.forEach(producto => {
-                const contenedor = document.getElementById("contenedor-productos");
-                contenedor.innerHTML += crearTarjetaProducto(producto);
+                contenedor.appendChild(crearTarjetaProducto(producto));
             });
         }
     }catch(e){
@@ -30,4 +50,3 @@ async function traerProductos() {
 }
 
 traerProductos();
-console.log("estamos en productos.js")

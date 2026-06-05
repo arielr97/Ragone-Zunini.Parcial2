@@ -6,7 +6,7 @@
         "autor": "Robert Martin",
         "precio": 20000,
         "activo": true,
-        "img": "http://localhost:3000/img/cleancode.jpg"
+        "img": "img/cleancode.jpg"
     },
     {
         "id": 2,
@@ -15,7 +15,7 @@
         "artista": "Michael Jackson",
         "precio": 15000,
         "activo": true,
-        "img": "http://localhost:3000/img/thriller.jpg"
+        "img": "img/thriller.jpg"
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "artista": "Green Day",
         "precio": 17000,
         "activo": true,
-        "img": "http://localhost:3000/img/greenday1.jpg"
+        "img": "img/greenday1.jpg"
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "autor": "Jules Verne",
         "precio": 10500,
         "activo": true,
-        "img": "http://localhost:3000/img/julioverne1.jpg"
+        "img": "img/julioverne1.jpg"
     },
         {
         "id": 5,
@@ -42,7 +42,7 @@
         "autor": "J. K. Rowling",
         "precio": 10000,
         "activo": true,
-        "img": "http://localhost:3000/img/harrypotter1.jpg"
+        "img": "img/harrypotter1.jpg"
     },
     {
         "id": 6,
@@ -51,6 +51,6 @@
         "artista": "Queen",
         "precio": 19000,
         "activo": true,
-        "img": "http://localhost:3000/img/queen1.jpg"
+        "img": "img/queen1.jpg"
     }
 ]
