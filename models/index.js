@@ -4,11 +4,13 @@ const VentaProducto = require("./VentaProducto");
 const Admin = require("./Admin");
 
 Venta.belongsToMany(Producto, {
-    through: VentaProducto
+    through: VentaProducto,
+    foreignKey: "VentaId"
 });
 
 Producto.belongsToMany(Venta, {
-    through: VentaProducto
+    through: VentaProducto,
+    foreignKey: "ProductoId"
 });
 
 module.exports = {
