@@ -2,12 +2,17 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
 const Producto = sequelize.define("Producto", {
+    tipo: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     nombre: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    descripcion: {
+    artista: {
         type: DataTypes.STRING
     },
 
@@ -16,19 +21,14 @@ const Producto = sequelize.define("Producto", {
         allowNull: false
     },
 
-    tipo: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    imagen: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
     activo: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    
+    img: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
