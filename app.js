@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const sequelize = require("./config/database");
-const { Admin, Producto, Venta } = require("./models");
+const { Admin, Producto } = require("./models");
 
 app.set("view engine", "ejs");
 
@@ -20,8 +20,8 @@ const routerAdmin = require("./routes/RouterAdmin");
 app.use("/admin", routerAdmin);
 
 sequelize.sync()
-    .then(async () => {
-        console.log("Base de datos sincronizada");
+.then(async () => {
+    console.log("Base de datos sincronizada");
 
     const adminExistente = await Admin.findOne({
         where: { email: "ola@mail.asd" }
@@ -31,8 +31,8 @@ sequelize.sync()
         const hash = await bcrypt.hash("admin123", 10);
 
         await Admin.create({
-        email: "ola@mail.asd",
-        password: hash
+            email: "ola@mail.asd",
+            password: hash
         });
 
         console.log("Admin creado");
@@ -44,7 +44,7 @@ sequelize.sync()
         const rutaArchivo = path.join(__dirname, "data", "productos.json");
 
         const productos = JSON.parse(
-        fs.readFileSync(rutaArchivo, "utf8")
+            fs.readFileSync(rutaArchivo, "utf8")
         );
 
         await Producto.bulkCreate(productos);
@@ -56,7 +56,7 @@ sequelize.sync()
         console.log("Servidor iniciado en puerto 3000");
     });
 
-    })
-    .catch((error) => {
+})
+.catch((error) => {
     console.error("Error al conectar la BD:", error);
 });

@@ -22,6 +22,9 @@ const crearProducto = async (req, res) => {
             cantidadStock
         } = req.body;
 
+        console.log("BODY COMPLETO:", req.body);
+        console.log("TIPO:", tipo);
+
         if (tipo !== "CD" && tipo !== "Libro") {
             return res.status(400).json({ mensaje: "Tipo inválido (CD o Libro)" });
         }
@@ -30,7 +33,7 @@ const crearProducto = async (req, res) => {
             tipo,
             nombre,
             precio,
-            activo: activo ?? true,
+            activo: activo !== undefined ? activo : true,
             img,
             cantidadStock
         };
@@ -61,7 +64,6 @@ const crearProducto = async (req, res) => {
         res.status(500).json({ mensaje: "Error al crear producto" });
     }
 };
-
 
 module.exports = {
     listarProductos,
