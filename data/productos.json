@@ -5,7 +5,8 @@
         "autor": "Robert Martin",
         "precio": 20000,
         "activo": true,
-        "img": "../img/cleancode.jpg"
+        "img": "../img/cleancode.jpg",
+        "cantidadStock": 4 
     },
     {
         "tipo": "CD",
@@ -13,7 +14,8 @@
         "artista": "Michael Jackson",
         "precio": 15000,
         "activo": true,
-        "img": "../img/thriller.jpg"
+        "img": "../img/thriller.jpg",
+        "cantidadStock": 5
     },
     {
         "tipo": "CD",
@@ -21,7 +23,8 @@
         "artista": "Green Day",
         "precio": 17000,
         "activo": true,
-        "img": "../img/greenday1.jpg"
+        "img": "../img/greenday1.jpg",
+        "cantidadStock": 3
     },
     {
         "tipo": "Libro",
@@ -29,7 +32,8 @@
         "autor": "Jules Verne",
         "precio": 10500,
         "activo": true,
-        "img": "../img/julioverne1.jpg"
+        "img": "../img/julioverne1.jpg",
+        "cantidadStock": 6
     },
         {
         "tipo": "Libro",
@@ -37,7 +41,8 @@
         "autor": "J. K. Rowling",
         "precio": 10000,
         "activo": true,
-        "img": "../img/harrypotter1.jpg"
+        "img": "../img/harrypotter1.jpg",
+        "cantidadStock": 10
     },
     {
         "tipo": "CD",
@@ -45,6 +50,7 @@
         "artista": "Queen",
         "precio": 19000,
         "activo": true,
-        "img": "../img/queen1.jpg"
+        "img": "../img/queen1.jpg",
+        "cantidadStock": 2
     }
 ]

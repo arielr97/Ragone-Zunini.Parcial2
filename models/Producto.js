@@ -13,7 +13,13 @@ const Producto = sequelize.define("Producto", {
     },
 
     artista: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+
+    autor: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
 
     precio: {
@@ -28,6 +34,11 @@ const Producto = sequelize.define("Producto", {
     
     img: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    cantidadStock: {
+        type: DataTypes.INTEGER,
         allowNull: false
     }
 });
