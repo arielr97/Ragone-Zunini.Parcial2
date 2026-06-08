@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Dashboard Productos</title>
+</head>
+<body>
+    <nav>
+        <img src="img/logo.png" alt="Logo">
+        <h1>Mi Tienda</h1>
+        <p>Ariel Ragone | Matias Zunini</p>
+        <p>Administrador</p>
+    </nav>
+    <h1>Productos</h1>
+    <a href="/admin/alta">Agregar Producto</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% productos.forEach(producto => { %>
+            <tr>
+                <td><img src="<%= producto.img %>" alt="<%= producto.nombre %>" width="80"></td>
+                <td><%= producto.nombre %></td>
+                <td><%= producto.tipo %></td>
+                <td><%= producto.precio %></td>
+                <td><button>Editar</button><button>Eliminar</button></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

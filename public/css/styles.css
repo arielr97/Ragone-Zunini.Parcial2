@@ -47,3 +47,14 @@ main {
     max-width: 100%;
     object-fit: cover;
 }
+
+table{
+    border-collapse: collapse;
+}
+td {
+    border: 5px solid rgb(29, 87, 43);
+    margin: 3px;
+}
+th {
+    border: 5px solid black;
+}
