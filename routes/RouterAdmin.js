@@ -4,67 +4,35 @@ const { Admin, Producto } = require("../models");
 
 const routerAdmin = express.Router();
 
+const { Producto } = require("../models");
+const { listarProductosAdmin } = require("../controllers/adminController");
+const { crearProductoAdmin } = require("../controllers/adminController");
+const { verificarAdmin } = require("../controllers/adminController")
+const { mostrarEditarProducto } = require("../controllers/adminController");
+const { editarProducto } = require("../controllers/adminController");
+const { eliminarProducto } = require("../controllers/adminController");
+
 routerAdmin.get("/", (req, res) => {
     res.render("admin/login", {
         titulo: "Panel Administrador"
     });
 });
 
-routerAdmin.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
+routerAdmin.post("/login", verificarAdmin);
 
-        const admin = await Admin.findOne({ where: { email } });
-
-        if (!admin) {
-            return res.redirect("/admin");
-        }
-
-        const validPassword = await bcrypt.compare(password, admin.password);
-
-        if (!validPassword) {
-            return res.redirect("/admin");
-        }
-
-        // (simple TP version: sin session todavía)
-        res.redirect("/admin/productos");
-
-    } catch (error) {
-        console.error(error);
-        res.redirect("/admin");
-    }
-});
-
-routerAdmin.get("/productos", async (req, res) => {
-    try {
-        const productos = await Producto.findAll();
-
-        res.render("admin/productos", {
-            productos
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.send("Error cargando productos");
-    }
-});
+routerAdmin.get("/productos", listarProductosAdmin);
 
 routerAdmin.get("/alta", (req, res) => {
+
     res.render("admin/altaProducto");
 });
 
-routerAdmin.get("/editar/:id", async (req, res) => {
-    try {
-        const producto = await Producto.findByPk(req.params.id);
+routerAdmin.post("/alta", crearProductoAdmin);
 
-        res.render("admin/editarProducto", {
-            producto
-        });
+routerAdmin.get("/editar/:id", mostrarEditarProducto);
 
-    } catch (error) {
-        console.error(error);
-        res.redirect("/admin/productos");
-    }
-});
+routerAdmin.post("/editar/:id", editarProducto);
+
+routerAdmin.post("/eliminar/:id", eliminarProducto);
 
 module.exports = routerAdmin;

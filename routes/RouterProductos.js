@@ -1,18 +1,7 @@
 const express = require("express");
 const routerProductos = express.Router();
 
-routerProductos.use((req, res, next) => {
-    console.log("ENTRÓ AL ROUTER:", req.method, req.url);
-    next();
-});
-
-const {
-    listarProductos,
-    crearProducto,
-    actualizarProducto,
-    eliminarProducto,
-    obtenerProductoPorId
-} = require("../controllers/productoController");
+const { listarProductos } = require("../controllers/productoController");
 
 routerProductos.get("/", listarProductos);
 routerProductos.post("/", crearProducto);

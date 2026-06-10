@@ -38,6 +38,8 @@ sequelize.sync()
 
         console.log("Admin creado");
     }
+    
+    await Producto.destroy({ where: {}, truncate: true}); // para reiniciar tabla productos (pruebas)
 
     await cargarProductos();
 
