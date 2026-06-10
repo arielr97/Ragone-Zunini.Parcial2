@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>Alta producto</title>
 </head>
 <body>
+    <nav>
+        <img src="img/logo.png" alt="Logo">
+        <h1>Mi Tienda</h1>
+        <p>Ariel Ragone | Matias Zunini</p>
+        <p>Administrador</p>
+    </nav>
     <h1>Alta Producto</h1>
-    <form action="/admin/alta" method="POST">
-    <label>Nombre: <input type="text" name="nombre" required></label><br>
-    <label>Tipo:<select name="tipo"><option value="Libro">Libro</option><option value="CD">CD</option></select></label><br>
+    <form action="/admin/alta" method="POST" id="form-alta">
+    <label>Nombre: <input type="text" name="nombre" placeholder="Nombre" required></label><br>
+    <label>Tipo: <select id="tipo" name="tipo"><option value="Libro">Libro</option><option value="CD">CD</option></select></label><br>
+    <div id="div-autor"><label>Autor: <input type="text" name="autor" id="autor-input" placeholder="Autor"><br></label></div>
+    <div id="div-artista"><label>Artista: <input type="text" name="artista" id="artista-input" placeholder="Artista"><br></label></div>
     <label>Precio: <input type="number" name="precio" required></label><br>
-    <label>Imagen: <input type="text" name="img"></label><br>
+    <label>Imagen: <input type="text" name="img" required></label><br>
+    <label>Cantidad Stock: <input type="number" name="cantidadStock" required></label><br>
     <button type="submit">Guardar</button>
 </form>
+<script>
+    const tipo = document.getElementById("tipo");
+    const divAutor = document.getElementById("div-autor");
+    const divArtista = document.getElementById("div-artista");
+    const autorInput = document.getElementById("autor-input");
+    const artistaInput = document.getElementById("artista-input");
+    function cambioTipo(){
+        if (tipo.value === "Libro") {
+            divAutor.style.display = "block";
+            divArtista.style.display = "none";
+            autorInput.required = true;
+            artistaInput.required = false;
+        } else {
+            divAutor.style.display = "none";
+            divArtista.style.display = "block";
+            autorInput.required = false;
+            artistaInput.required = true;
+        }
+    }
+    cambioTipo();
+    tipo.addEventListener("change", cambioTipo);
+</script>
 </body>
 </html>
