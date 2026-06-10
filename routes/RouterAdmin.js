@@ -4,6 +4,14 @@ const path = require("path");
 
 const routerAdmin = express.Router();
 
+const { Producto } = require("../models");
+const { listarProductosAdmin } = require("../controllers/adminController");
+const { crearProductoAdmin } = require("../controllers/adminController");
+const { verificarAdmin } = require("../controllers/adminController")
+const { mostrarEditarProducto } = require("../controllers/adminController");
+const { editarProducto } = require("../controllers/adminController");
+const { eliminarProducto } = require("../controllers/adminController");
+
 routerAdmin.get("/", (req, res) => {
 
     res.render("admin/login", {
@@ -12,49 +20,21 @@ routerAdmin.get("/", (req, res) => {
 
 });
 
-routerAdmin.post("/login", (req, res) => {
+routerAdmin.post("/login", verificarAdmin);
 
-    const { email, password } = req.body;
-    const rutaArchivo = path.join(__dirname, "..", "data", "administradores.json");
-    const administradores = JSON.parse(fs.readFileSync(rutaArchivo,"utf8"));
-    const admin = administradores.find(a =>
-        a.email === email &&
-        a.password === password
-    );
-    if(admin){
-        res.redirect("/admin/productos");
-    }else{
-        res.redirect("/admin");
-    }
-});
-
-routerAdmin.get("/productos", (req, res) => {
-
-    const rutaArchivo = path.join(
-        __dirname,"..","data","productos.json"
-    );
-
-    const productos = JSON.parse(fs.readFileSync(rutaArchivo, "utf8"));
-    res.render("admin/productos", {
-        productos: productos
-    });
-
-});
+routerAdmin.get("/productos", listarProductosAdmin);
 
 routerAdmin.get("/alta", (req, res) => {
 
-    res.render("admin/altaProducto", {
-    });
-
+    res.render("admin/altaProducto");
 });
 
-routerAdmin.get("/editar/:id", (req, res) => {
+routerAdmin.post("/alta", crearProductoAdmin);
 
-    console.log(req.params.id);
+routerAdmin.get("/editar/:id", mostrarEditarProducto);
 
-    res.render("admin/editarProducto", {
-    });
+routerAdmin.post("/editar/:id", editarProducto);
 
-});
+routerAdmin.post("/eliminar/:id", eliminarProducto);
 
 module.exports = routerAdmin;

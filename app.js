@@ -37,6 +37,8 @@ sequelize.sync()
 
         console.log("Admin creado");
     }
+    
+    await Producto.destroy({ where: {}, truncate: true}); // para reiniciar tabla productos (pruebas)
 
     const cantidadProductos = await Producto.count();
 
@@ -46,7 +48,7 @@ sequelize.sync()
         const productos = JSON.parse(
         fs.readFileSync(rutaArchivo, "utf8")
         );
-
+        
         await Producto.bulkCreate(productos);
 
         console.log("Productos iniciales cargados");
