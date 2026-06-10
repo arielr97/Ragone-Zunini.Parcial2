@@ -1,6 +1,6 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
+const bcrypt = require("bcrypt");
+const { Admin, Producto } = require("../models");
 
 const routerAdmin = express.Router();
 
@@ -13,11 +13,9 @@ const { editarProducto } = require("../controllers/adminController");
 const { eliminarProducto } = require("../controllers/adminController");
 
 routerAdmin.get("/", (req, res) => {
-
     res.render("admin/login", {
         titulo: "Panel Administrador"
     });
-
 });
 
 routerAdmin.post("/login", verificarAdmin);

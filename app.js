@@ -3,9 +3,10 @@ const app = express();
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
+const cargarProductos = require("./seedProductos");
 
 const sequelize = require("./config/database");
-const { Admin, Producto, Venta } = require("./models");
+const { Admin, Producto } = require("./models");
 
 app.set("view engine", "ejs");
 
@@ -20,8 +21,8 @@ const routerAdmin = require("./routes/RouterAdmin");
 app.use("/admin", routerAdmin);
 
 sequelize.sync()
-    .then(async () => {
-        console.log("Base de datos sincronizada");
+.then(async () => {
+    console.log("Base de datos sincronizada");
 
     const adminExistente = await Admin.findOne({
         where: { email: "ola@mail.asd" }
@@ -31,8 +32,8 @@ sequelize.sync()
         const hash = await bcrypt.hash("admin123", 10);
 
         await Admin.create({
-        email: "ola@mail.asd",
-        password: hash
+            email: "ola@mail.asd",
+            password: hash
         });
 
         console.log("Admin creado");
@@ -40,25 +41,13 @@ sequelize.sync()
     
     await Producto.destroy({ where: {}, truncate: true}); // para reiniciar tabla productos (pruebas)
 
-    const cantidadProductos = await Producto.count();
-
-    if (cantidadProductos === 0) {
-        const rutaArchivo = path.join(__dirname, "data", "productos.json");
-
-        const productos = JSON.parse(
-        fs.readFileSync(rutaArchivo, "utf8")
-        );
-        
-        await Producto.bulkCreate(productos);
-
-        console.log("Productos iniciales cargados");
-    }
+    await cargarProductos();
 
     app.listen(3000, () => {
         console.log("Servidor iniciado en puerto 3000");
     });
 
-    })
-    .catch((error) => {
+})
+.catch((error) => {
     console.error("Error al conectar la BD:", error);
 });

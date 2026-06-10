@@ -27,8 +27,7 @@ async function cargarProductos() {
             activo: p.activo ?? true,
             img: p.img,
             cantidadStock: p.cantidadStock ?? 0,
-
-            // lógica CD / Libro
+            
             artista: p.tipo === "CD" ? p.artista : null,
             autor: p.tipo === "Libro" ? p.autor : null
         }));
@@ -42,4 +41,4 @@ async function cargarProductos() {
     }
 }
 
-cargarProductos();
+module.exports = cargarProductos;
