@@ -3,6 +3,7 @@ const app = express();
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
+const cargarProductos = require("./seedProductos");
 
 const sequelize = require("./config/database");
 const { Admin, Producto } = require("./models");
@@ -38,19 +39,7 @@ sequelize.sync()
         console.log("Admin creado");
     }
 
-    const cantidadProductos = await Producto.count();
-
-    if (cantidadProductos === 0) {
-        const rutaArchivo = path.join(__dirname, "data", "productos.json");
-
-        const productos = JSON.parse(
-            fs.readFileSync(rutaArchivo, "utf8")
-        );
-
-        await Producto.bulkCreate(productos);
-
-        console.log("Productos iniciales cargados");
-    }
+    await cargarProductos();
 
     app.listen(3000, () => {
         console.log("Servidor iniciado en puerto 3000");
