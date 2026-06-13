@@ -6,7 +6,7 @@ const routerAdmin = express.Router();
 
 const { Producto } = require("../models");
 const { listarProductosAdmin } = require("../controllers/adminController");
-const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto } = require("../controllers/productoController");
+const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto, activarProducto } = require("../controllers/productoController");
 const { verificarAdmin } = require("../controllers/adminController")
 
 routerAdmin.get("/", (req, res) => {
@@ -32,5 +32,7 @@ routerAdmin.get("/editar/:id", obtenerProductoPorId);
 routerAdmin.post("/editar/:id", actualizarProducto);
 
 routerAdmin.post("/eliminar/:id", eliminarProducto);
+
+routerAdmin.post("/activar/:id", activarProducto);
 
 module.exports = routerAdmin;
