@@ -3,9 +3,20 @@ const { construirProducto } = require("../controllers/helpers/producto.helper");
 
 const listarProductos = async (req, res) => {
     try {
-        const productos = await Producto.findAll({where: {activo: true}});
 
-        res.json(productos);
+        const pagina = parseInt(req.query.page) || 1;
+        
+        const productosPorPagina = 6;
+
+        const offset = (pagina - 1) * productosPorPagina;
+
+        const resultado = await Producto.findAndCountAll({
+            where: {activo: true},
+            limit: productosPorPagina,
+            offset: offset
+        });
+
+        res.json({ total: resultado.count, productos: resultado.rows });
     } catch (error) {
         res.status(500).json({mensaje: "Error al obtener productos"});
     }
