@@ -4,7 +4,7 @@ const { construirProducto } = require("../controllers/helpers/producto.helper");
 const listarProductos = async (req, res) => {
     try {
         const productos = await Producto.findAll({where: {activo: true}});
-        
+
         res.json(productos);
     } catch (error) {
         res.status(500).json({mensaje: "Error al obtener productos"});
@@ -65,6 +65,25 @@ const eliminarProducto = async (req, res) => {
     }
 };
 
+const activarProducto = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const producto = await Producto.findByPk(id);
+        if (!producto) {
+            return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
+        }
+
+        await producto.update({ activo: true });
+
+        return res.redirect("/admin/productos");
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).render("admin/error", { mensaje: "Error al activar el producto" });
+    }
+};
+
 const obtenerProductoPorId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -87,5 +106,6 @@ module.exports = {
     crearProducto,
     actualizarProducto,
     eliminarProducto,
+    activarProducto,
     obtenerProductoPorId
 };
