@@ -24,6 +24,7 @@
                 <th>Autor/Artista</th>
                 <th>Precio</th>
                 <th>Stock</th>
+                <th>Activo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -36,10 +37,14 @@
                 <td><%= producto.autor ? producto.autor : producto.artista %></td>
                 <td><%= producto.precio %></td>
                 <td><%= producto.cantidadStock %></td>
+                <td><b><%= producto.activo == true ? "SI" : "NO" %></b></td>
                 <td><a href="/admin/editar/<%= producto.id %>"><button>Editar</button></a>
-                    <form action="/admin/eliminar/<%= producto.id %>" method="POST">
+                    <% if (producto.activo) { %> <form action="/admin/eliminar/<%= producto.id %>" method="POST">
                         <button type="submit">Eliminar</button>
-                    </form>
+                    </form> <% } else { %>
+                    <form action="/admin/activar/<%= producto.id %>" method="POST">
+                        <button type="submit">Activar</button>
+                    </form> <% } %>
                 </td>
             </tr>
             <% }) %>
