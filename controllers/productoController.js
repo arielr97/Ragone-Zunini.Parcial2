@@ -4,6 +4,7 @@ const { construirProducto } = require("../controllers/helpers/producto.helper");
 const listarProductos = async (req, res) => {
     try {
         const productos = await Producto.findAll({where: {activo: true}});
+        
         res.json(productos);
     } catch (error) {
         res.status(500).json({mensaje: "Error al obtener productos"});
@@ -16,10 +17,11 @@ const crearProducto = async (req, res) => {
 
         const producto = await Producto.create(nuevoProducto);
 
-        res.status(201).json(producto);
+        return res.redirect("/admin/productos");
 
     } catch (error) {
-        res.status(400).json({ mensaje: error.message });
+        console.error(error);
+        return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
     }
 };
 
@@ -28,22 +30,19 @@ const actualizarProducto = async (req, res) => {
         const { id } = req.params;
 
         const productoDB = await Producto.findByPk(id);
-
+        
         if (!productoDB) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
         }
 
         const datosActualizados = construirProducto(req.body, productoDB);
 
         await productoDB.update(datosActualizados);
 
-        res.json({
-            mensaje: "Producto actualizado correctamente",
-            producto: productoDB
-        });
+        return res.redirect("/admin/productos");
 
     } catch (error) {
-        res.status(400).json({ mensaje: error.message });
+        return res.status(500).render("admin/error", { mensaje: "Hubo un error al modificar el producto" });
     }
 };
 
@@ -52,18 +51,17 @@ const eliminarProducto = async (req, res) => {
         const { id } = req.params;
 
         const producto = await Producto.findByPk(id);
-
         if (!producto) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
         }
 
-        await producto.destroy();
+        await producto.update({ activo: false });
 
-        res.json({ mensaje: "Producto eliminado correctamente" });
+        return res.redirect("/admin/productos");
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ mensaje: "Error al eliminar producto" });
+        return res.status(500).render("admin/error", { mensaje: "Error al eliminar el producto" });
     }
 };
 
@@ -74,13 +72,13 @@ const obtenerProductoPorId = async (req, res) => {
         const producto = await Producto.findByPk(id);
 
         if (!producto) {
-            return res.status(404).json({ mensaje: "Producto no encontrado" });
+            return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
         }
 
-        res.json(producto);
+        res.render("admin/editarProducto",{ producto });
 
     } catch (error) {
-        res.status(500).json({ mensaje: "Error al obtener producto" });
+        return res.status(500).render("admin/error", { mensaje: "Error al obtener producto" });
     }
 };
 

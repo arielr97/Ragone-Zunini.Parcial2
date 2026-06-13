@@ -6,18 +6,14 @@ const routerAdmin = express.Router();
 
 const { Producto } = require("../models");
 const { listarProductosAdmin } = require("../controllers/adminController");
-const { crearProductoAdmin } = require("../controllers/adminController");
+const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto } = require("../controllers/productoController");
 const { verificarAdmin } = require("../controllers/adminController")
-const { mostrarEditarProducto } = require("../controllers/adminController");
-const { editarProducto } = require("../controllers/adminController");
-const { eliminarProducto } = require("../controllers/adminController");
 
 routerAdmin.get("/", (req, res) => {
 
     res.render("admin/login", {
         titulo: "Panel Administrador"
     });
-
 });
 
 routerAdmin.post("/login", verificarAdmin);
@@ -29,11 +25,11 @@ routerAdmin.get("/alta", (req, res) => {
     res.render("admin/altaProducto");
 });
 
-routerAdmin.post("/alta", crearProductoAdmin);
+routerAdmin.post("/alta", crearProducto);
 
-routerAdmin.get("/editar/:id", mostrarEditarProducto);
+routerAdmin.get("/editar/:id", obtenerProductoPorId);
 
-routerAdmin.post("/editar/:id", editarProducto);
+routerAdmin.post("/editar/:id", actualizarProducto);
 
 routerAdmin.post("/eliminar/:id", eliminarProducto);
 
