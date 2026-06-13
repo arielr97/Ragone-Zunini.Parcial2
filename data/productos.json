@@ -46,11 +46,73 @@
     },
     {
         "tipo": "CD",
+        "nombre": "First Impressions of Earth",
+        "artista": "The Strokes",
+        "precio": 13500,
+        "activo": true,
+        "img": "../img/thestrokes1.jpg",
+        "cantidadStock": 5
+    },
+    {
+        "tipo": "CD",
+        "nombre": "Hybrid Theory",
+        "artista": "Linkin Park",
+        "precio": 22000,
+        "activo": true,
+        "img": "../img/linkinpark1.jpg",
+        "cantidadStock": 2
+    },
+    {
+        "tipo": "Libro",
+        "nombre": "Harry Potter and the Chamber of Secrets",
+        "autor": "J. K. Rowling",
+        "precio": 10000,
+        "activo": true,
+        "img": "../img/harrypotter2.jpg",
+        "cantidadStock": 10
+    },
+    {
+        "tipo": "Libro",
+        "nombre": "The Lord of the Rings: The Fellowship of the Ring",
+        "autor": "J. R. R. Tolkien",
+        "precio": 13000,
+        "activo": true,
+        "img": "../img/tolkien1.jpg",
+        "cantidadStock": 8
+    },
+    {
+        "tipo": "Libro",
+        "nombre": "The Lord of the Rings: The Two Towers",
+        "autor": "J. R. R. Tolkien",
+        "precio": 13000,
+        "activo": true,
+        "img": "../img/tolkien2.jpg",
+        "cantidadStock": 8
+    },
+    {
+        "tipo": "Libro",
+        "nombre": "The Lord of the Rings: The Return of the King",
+        "autor": "J. R. R. Tolkien",
+        "precio": 13000,
+        "activo": true,
+        "img": "../img/tolkien3.jpg",
+        "cantidadStock": 8
+    },
+    {
+        "tipo": "Libro",
+        "nombre": "1984",
+        "artista": "George Orwell",
+        "precio": 11350,
+        "activo": true,
+        "img": "../img/georgeorwell1.jpg",
+        "cantidadStock": 2
+    },
+    {"tipo": "CD",
         "nombre": "A Night At The Opera",
         "artista": "Queen",
-        "precio": 19000,
+        "precio": 21500,
         "activo": true,
         "img": "../img/queen1.jpg",
-        "cantidadStock": 2
+        "cantidadStock": 5
     }
 ]

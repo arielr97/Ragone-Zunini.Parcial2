@@ -1,4 +1,8 @@
 const contenedor = document.getElementById("contenedor-productos");
+let paginaActual = 1;
+const btnAnterior = document.getElementById("anterior");
+const btnSiguiente = document.getElementById("siguiente");
+let totalPaginas = 1;
 
 function crearTarjetaProducto(producto){
     const tarjeta = document.createElement("div");
@@ -33,13 +37,14 @@ function agregarAlCarrito(producto){
 
 async function traerProductos() {
     try{
-        const respuesta = await fetch("/api/productos");
-
+        contenedor.innerHTML = "";
+        const respuesta = await fetch(`/api/productos?page=${paginaActual}`);
         if(!respuesta.ok){
             throw new Error("Error al obtener productos");
         }else{
-            const productos = await respuesta.json();
-            productos.forEach(producto => {
+            const data = await respuesta.json();
+            totalPaginas = Math.ceil(data.total / 6);
+            data.productos.forEach(producto => {
                 contenedor.appendChild(crearTarjetaProducto(producto));
             });
         }
@@ -50,3 +55,19 @@ async function traerProductos() {
 }
 
 traerProductos();
+
+btnSiguiente.addEventListener("click", () => {
+
+    if (paginaActual < totalPaginas) {
+        paginaActual++;
+        traerProductos();
+    }
+});
+
+btnAnterior.addEventListener("click", () => {
+
+    if (paginaActual > 1) {
+        paginaActual--;
+        traerProductos();
+    }
+});

@@ -1,6 +1,10 @@
-const btnCliente = document.getElementById("btn-cliente");
+const formulario = document.getElementById("form-cliente");
 
-btnCliente.addEventListener("click", () => {
-    
-    window.location.href = "cliente.html";
+formulario.addEventListener("submit", (e) =>{
+
+    e.preventDefault();
+    const nombre = document.getElementById("nombre-cliente").value;
+    localStorage.setItem("cliente", nombre);
+
+    window.location.href = "productos.html";
 });
