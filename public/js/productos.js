@@ -3,12 +3,19 @@ let paginaActual = 1;
 const btnAnterior = document.getElementById("anterior");
 const btnSiguiente = document.getElementById("siguiente");
 let totalPaginas = 1;
+let tipoSeleccionado = "";
+let textoBusqueda = "";
+const filtroTipo = document.getElementById("filtro-tipo");
+const inputBusqueda = document.getElementById("busqueda");
+const btnBuscar = document.getElementById("btn-buscar");
 
 function crearTarjetaProducto(producto){
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("producto");
     const titulo = document.createElement("h3");
-    titulo.textContent = producto.nombre;
+    titulo.textContent = producto.nombre
+    const art = document.createElement("h5");
+    producto.artista ? art.textContent = producto.artista : art.textContent = producto.autor;
     const img = document.createElement("img");
     img.src = producto.img;
     img.alt = producto.nombre;
@@ -21,6 +28,7 @@ function crearTarjetaProducto(producto){
     });
 
     tarjeta.appendChild(titulo);
+    tarjeta.appendChild(art);
     tarjeta.appendChild(img);
     tarjeta.appendChild(precio);
     tarjeta.appendChild(boton);
@@ -38,7 +46,7 @@ function agregarAlCarrito(producto){
 async function traerProductos() {
     try{
         contenedor.innerHTML = "";
-        const respuesta = await fetch(`/api/productos?page=${paginaActual}`);
+        const respuesta = await fetch(`/api/productos?page=${paginaActual}&tipo=${tipoSeleccionado}&busqueda=${textoBusqueda}`);
         if(!respuesta.ok){
             throw new Error("Error al obtener productos");
         }else{
@@ -70,4 +78,18 @@ btnAnterior.addEventListener("click", () => {
         paginaActual--;
         traerProductos();
     }
+});
+
+filtroTipo.addEventListener("change", () => {
+
+    tipoSeleccionado = filtroTipo.value;
+    paginaActual = 1;
+    traerProductos();
+});
+
+btnBuscar.addEventListener("click", () => {
+
+    textoBusqueda = inputBusqueda.value.trim();
+    paginaActual = 1;
+    traerProductos();
 });

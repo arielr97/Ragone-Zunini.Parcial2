@@ -11,14 +11,13 @@
         <img src="img/logo.png" alt="Logo">
         <h1>Mi Tienda</h1>
         <p>Ariel Ragone | Matias Zunini</p>
-        <p>Administrador</p>
     </nav>
     <h1>Modificar Producto</h1>
     <h3>Producto a Editar:</h3>
     <form action="/admin/editar/<%= producto.id %>" method="POST">
         <label>Nombre:<input type="text" name="nombre" value="<%= producto.nombre %>" required></label><br>
         <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" required></label><br>
-        <label>Imagen:<input type="text" name="img" value="<%= producto.img %>"></label><br>
+        <label>Imagen:<input type="file" name="img" value="../../<%= producto.img %>"></label><br>
         <label>Cantidad Stock:<input type="number" name="cantidadStock" value="<%= producto.cantidadStock %>"></label><br>
         <button type="submit">Guardar Cambios</button>
     </form>

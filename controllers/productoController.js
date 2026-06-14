@@ -1,17 +1,31 @@
 const { Producto } = require("../models");
 const { construirProducto } = require("../controllers/helpers/producto.helper");
+const { Op } = require("sequelize");
 
 const listarProductos = async (req, res) => {
     try {
 
         const pagina = parseInt(req.query.page) || 1;
-        
         const productosPorPagina = 6;
-
         const offset = (pagina - 1) * productosPorPagina;
+        const tipo = req.query.tipo;
+        const busqueda = req.query.busqueda;
+        const where = { activo: true };
+
+        if (tipo) {
+            where.tipo = tipo
+        };
+
+        if (busqueda) {
+            where[Op.or] = [
+                { nombre: { [Op.like]: `%${busqueda}%` }},
+                { autor: { [Op.like]: `%${busqueda}%` }},
+                { artista: { [Op.like]: `%${busqueda}%` }}
+            ];
+        }
 
         const resultado = await Producto.findAndCountAll({
-            where: {activo: true},
+            where,
             limit: productosPorPagina,
             offset: offset
         });
