@@ -101,13 +101,14 @@
     {
         "tipo": "Libro",
         "nombre": "1984",
-        "artista": "George Orwell",
+        "autor": "George Orwell",
         "precio": 11350,
         "activo": true,
         "img": "../img/georgeorwell1.jpg",
         "cantidadStock": 2
     },
-    {"tipo": "CD",
+    {
+        "tipo": "CD",
         "nombre": "A Night At The Opera",
         "artista": "Queen",
         "precio": 21500,

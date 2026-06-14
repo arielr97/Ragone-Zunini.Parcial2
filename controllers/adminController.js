@@ -1,10 +1,28 @@
 const { Producto } = require("../models");
 const { Admin } = require("../models");
 const bcrypt = require("bcrypt");
+const { Op } = require("sequelize");
 
 const listarProductosAdmin = async (req, res) => {
     try {
-        const productos = await Producto.findAll();
+
+        const tipo = req.query.tipo;
+        const busqueda = req.query.busqueda;
+        const where = {};
+
+        if (tipo) {
+            where.tipo = tipo
+        };
+
+        if (busqueda) {
+            where[Op.or] = [
+                { nombre: { [Op.like]: `%${busqueda}%` }},
+                { autor: { [Op.like]: `%${busqueda}%` }},
+                { artista: { [Op.like]: `%${busqueda}%` }},
+                { id: { [Op.like]: `%${busqueda}%` }}
+            ];
+        }
+        const productos = await Producto.findAll({ where });
         res.render("admin/productos", {
             productos: productos
         });

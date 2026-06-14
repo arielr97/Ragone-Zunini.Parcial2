@@ -11,9 +11,17 @@
         <img src="img/logo.png" alt="Logo">
         <h1>Mi Tienda</h1>
         <p>Ariel Ragone | Matias Zunini</p>
-        <p>Administrador</p>
     </nav>
     <h1>Productos</h1>
+    <form action="/admin/productos" method="GET">
+        <select name="tipo">
+            <option value="">Todos</option>
+            <option value="Libro">Libros</option>
+            <option value="CD">CDs</option>
+        </select>
+        <input type="text" name="busqueda" placeholder="Buscar producto...">
+        <button type="submit">Filtrar</button>
+    </form>
     <a href="/admin/alta"><button>Agregar Producto</button></a>
     <table>
         <thead>
@@ -25,6 +33,7 @@
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Activo</th>
+                <th>ID</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -38,6 +47,7 @@
                 <td><%= producto.precio %></td>
                 <td><%= producto.cantidadStock %></td>
                 <td><b><%= producto.activo == true ? "SI" : "NO" %></b></td>
+                <td><b><%= producto.id %></b></td>
                 <td><a href="/admin/editar/<%= producto.id %>"><button>Editar</button></a>
                     <% if (producto.activo) { %> <form action="/admin/eliminar/<%= producto.id %>" method="POST">
                         <button type="submit">Eliminar</button>
