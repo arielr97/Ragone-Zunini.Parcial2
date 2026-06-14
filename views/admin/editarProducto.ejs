@@ -17,7 +17,7 @@
     <form action="/admin/editar/<%= producto.id %>" method="POST">
         <label>Nombre:<input type="text" name="nombre" value="<%= producto.nombre %>" required></label><br>
         <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" required></label><br>
-        <label>Imagen:<input type="file" name="img" value="../../<%= producto.img %>"></label><br>
+        <label>Imagen:<input type="file" name="img" value="<%= producto.img %>"></label><br>
         <label>Cantidad Stock:<input type="number" name="cantidadStock" value="<%= producto.cantidadStock %>"></label><br>
         <button type="submit">Guardar Cambios</button>
     </form>
