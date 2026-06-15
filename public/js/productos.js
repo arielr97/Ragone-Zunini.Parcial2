@@ -5,9 +5,11 @@ const btnSiguiente = document.getElementById("siguiente");
 let totalPaginas = 1;
 let tipoSeleccionado = "";
 let textoBusqueda = "";
+let ordenPrecio = "";
 const filtroTipo = document.getElementById("filtro-tipo");
 const inputBusqueda = document.getElementById("busqueda");
 const btnBuscar = document.getElementById("btn-buscar");
+const selectOrden = document.getElementById("orden-precio");
 
 function crearTarjetaProducto(producto){
     const tarjeta = document.createElement("div");
@@ -46,7 +48,7 @@ function agregarAlCarrito(producto){
 async function traerProductos() {
     try{
         contenedor.innerHTML = "";
-        const respuesta = await fetch(`/api/productos?page=${paginaActual}&tipo=${tipoSeleccionado}&busqueda=${textoBusqueda}`);
+        const respuesta = await fetch(`/api/productos?page=${paginaActual}&tipo=${tipoSeleccionado}&busqueda=${textoBusqueda}&orden=${ordenPrecio}`);
         if(!respuesta.ok){
             throw new Error("Error al obtener productos");
         }else{
@@ -90,6 +92,13 @@ filtroTipo.addEventListener("change", () => {
 btnBuscar.addEventListener("click", () => {
 
     textoBusqueda = inputBusqueda.value.trim();
+    paginaActual = 1;
+    traerProductos();
+});
+
+selectOrden.addEventListener("change", () => {
+    
+    ordenPrecio = selectOrden.value;
     paginaActual = 1;
     traerProductos();
 });
