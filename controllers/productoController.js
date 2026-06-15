@@ -11,6 +11,7 @@ const listarProductos = async (req, res) => {
         const tipo = req.query.tipo;
         const busqueda = req.query.busqueda;
         const where = { activo: true };
+        const orden = req.query.orden;
 
         if (tipo) {
             where.tipo = tipo
@@ -24,8 +25,19 @@ const listarProductos = async (req, res) => {
             ];
         }
 
+        let order = [];
+
+        if (orden === "asc") {
+            order.push(["precio", "ASC"]);
+        }
+
+        if (orden === "desc") {
+            order.push(["precio", "DESC"]);
+        }
+
         const resultado = await Producto.findAndCountAll({
             where,
+            order,
             limit: productosPorPagina,
             offset: offset
         });
