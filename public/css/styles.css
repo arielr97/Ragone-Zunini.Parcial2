@@ -65,9 +65,9 @@ nav a:hover {
 }
 
 main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 25px;
+    padding: 25px 40px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .toolbar-filtros {
@@ -210,4 +210,47 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.acciones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.form-admin {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    column-gap: 12px;
+}
+
+.form-row label {
+    justify-self: end;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.form-row input,
+.form-row select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }

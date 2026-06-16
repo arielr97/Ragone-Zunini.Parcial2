@@ -10,20 +10,21 @@ const sequelize = require("./config/database");
 
 const { Admin, Producto } = require("./models");
 
-// ✔ EJS CONFIG
 app.set("view engine", "ejs");
 
-// ✔ LAYOUTS (ESTO FALTABA)
 const expressLayouts = require("express-ejs-layouts");
 app.use(expressLayouts);
 app.set("layout", "layout");
 
-// ✔ MIDDLEWARES
+app.use((req, res, next) => {
+    res.locals.title = "Mi Tienda";
+    next();
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// ✔ ROUTES
 const routerProductos = require("./routes/RouterProductos");
 const routerVentas = require("./routes/RouterVentas");
 const routerAdmin = require("./routes/RouterAdmin");
@@ -32,7 +33,6 @@ app.use("/api/productos", routerProductos);
 app.use("/api/ventas", routerVentas);
 app.use("/admin", routerAdmin);
 
-// ✔ DB INIT
 sequelize.sync()
     .then(async () => {
         console.log("Base de datos sincronizada");
@@ -52,7 +52,6 @@ sequelize.sync()
             console.log("Admin creado");
         }
 
-        // ⚠️ SOLO PARA PRUEBAS (borra datos)
         await Producto.destroy({ where: {}, truncate: true });
 
         await cargarProductos();

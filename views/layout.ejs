@@ -2,12 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><%= typeof title !== 'undefined' ? title : "Mi Tienda" %></title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-
-    <%- include('partials/nav', { showClienteLink: showClienteLink }) %>
+    <%- include('partials/nav', { showClienteLink: false }) %>
 
     <main class="container">
         <%- body %>
