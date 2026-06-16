@@ -1,65 +1,213 @@
+:root {
+    --bg: #0b0f14;
+    --panel: #111826;
+    --panel-2: #0f1620;
+
+    --text: #e6e6e6;
+
+    --primary: #00f5ff;
+    --secondary: #ff00ff;
+
+    --border: rgba(0, 255, 255, 0.12);
+    --border-soft: rgba(255, 255, 255, 0.06);
+}
+
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 nav {
-    background-color: black;
-    color: white;
+    background-color: var(--panel-2);
 
-    padding: 15px;
+    padding: 15px 25px;
 
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 25px;
+
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border);
 }
 
 nav a {
-    color: white;
+    color: var(--text);
     text-decoration: none;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary);
+}
+
+#btn-carrito {
+    margin-left: auto;
+
+    padding: 10px 16px;
+
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+
+    border-radius: 6px;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+#btn-carrito:hover {
+    background: var(--primary);
+    color: var(--bg);
+    box-shadow: 0 0 15px var(--primary);
 }
 
 main {
-    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.toolbar-filtros {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin: 20px 0;
+    padding: 15px;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+input,
+select {
+    padding: 10px 12px;
+
+    background: var(--panel-2);
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    outline: none;
+    transition: 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
+}
+
+button {
+    padding: 10px 14px;
+
+    background: transparent;
+    color: var(--primary);
+
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: var(--primary);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--primary);
 }
 
 #contenedor-productos {
     display: flex;
-    text-align: center;
-    align-items: center;
-    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 35px;
 }
 
-
-
 .producto {
-    max-width: 200px;
-    max-height: 400px;
-    max-height: 100%;
+    width: 220px;
+
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    transition: 0.2s ease;
 }
 
 .producto:hover {
-    transform: scale(1.02);
-    opacity: 0.9;
+    transform: translateY(-4px);
+    border-color: var(--primary);
 }
 
-.producto img{
-    max-width: 100%;
+.producto img {
+    width: 100%;
+    height: 180px;
     object-fit: cover;
 }
 
-table{
-    border-collapse: collapse;
+.producto h3,
+.producto p {
+    margin: 8px 10px;
 }
-td {
-    border: 5px solid rgb(29, 87, 43);
-    margin: 3px;
+
+.precio {
+    margin: 5px 10px;
+
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: bold;
 }
-th {
-    border: 5px solid black;
+
+#paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    margin: 25px 0;
+}
+
+#btn-carrito-bottom {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+#btn-carrito-bottom:hover {
+    background: var(--secondary);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--secondary);
 }
 
 #contenedor-carrito {
     display: flex;
-    gap: 5px;
+    flex-wrap: wrap;   /* ✔ decisión final */
+    justify-content: flex-start;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+#contenedor-carrito > div {
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }

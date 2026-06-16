@@ -7,11 +7,6 @@
     <title>Dashboard Productos</title>
 </head>
 <body>
-    <nav>
-        <img src="img/logo.png" alt="Logo">
-        <h1>Mi Tienda</h1>
-        <p>Ariel Ragone | Matias Zunini</p>
-    </nav>
     <h1>Productos</h1>
     <form action="/admin/productos" method="GET">
         <select name="tipo">
@@ -19,9 +14,11 @@
             <option value="Libro">Libros</option>
             <option value="CD">CDs</option>
         </select>
+
         <input type="text" name="busqueda" placeholder="Buscar producto...">
         <button type="submit">Filtrar</button>
     </form>
+
     <a href="/admin/alta"><button>Agregar Producto</button></a>
     <table>
         <thead>

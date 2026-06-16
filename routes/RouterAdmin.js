@@ -10,7 +10,6 @@ const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProduct
 const { verificarAdmin } = require("../controllers/adminController")
 
 routerAdmin.get("/", (req, res) => {
-
     res.render("admin/login", {
         titulo: "Panel Administrador"
     });
