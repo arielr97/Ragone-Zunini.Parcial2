@@ -50,7 +50,8 @@ const listarProductos = async (req, res) => {
 
 const crearProducto = async (req, res) => {
     try {
-        const nuevoProducto = construirProducto(req.body);
+        const imagen = req.file ? '/uploads/' + req.file.filename : null;
+        const nuevoProducto = construirProducto({ ...req.body, img: imagen });
 
         const producto = await Producto.create(nuevoProducto);
 
@@ -72,7 +73,8 @@ const actualizarProducto = async (req, res) => {
             return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
         }
 
-        const datosActualizados = construirProducto(req.body, productoDB);
+        const imagen = req.file ? '/uploads/' + req.file.filename : productoDB.img;
+        const datosActualizados = construirProducto({ ...req.body, img: imagen }, productoDB);
 
         await productoDB.update(datosActualizados);
 
