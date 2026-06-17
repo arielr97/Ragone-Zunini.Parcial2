@@ -4,7 +4,8 @@ const sequelize = require("../config/database");
 const VentaProducto = sequelize.define("VentaProducto", {
     cantidad: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 1
     }
 });
 

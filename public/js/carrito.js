@@ -51,7 +51,7 @@ function quitarDelCarrito(producto){
 function dibujarCarrito(){
     contenedorCarrito.innerHTML = "";
     contenedorTotal.innerHTML = "";
-    let listaCarrito = JSON.parse(localStorage.getItem("carrito"));
+    let listaCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let listaSinDuplicados = listaCarrito.filter((objeto, indice, array) => {
         return array.findIndex(item => item.nombre === objeto.nombre) === indice;
     });
@@ -73,5 +73,47 @@ botonVaciarCarrito.addEventListener("click", () => {
     localStorage.setItem("carrito", JSON.stringify([]));
     dibujarCarrito();
 })
+
+botonFinalizarCompra.addEventListener("click", async () => {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    if (carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+    }
+
+    const productosAgrupados = [];
+    carrito.forEach(producto => {
+        const productoExistente = productosAgrupados.find(p => p.id === producto.id);
+        if (productoExistente) {
+            productoExistente.cantidad++;
+        } else {
+            productosAgrupados.push({ id: producto.id, cantidad: 1});
+        }
+    });
+    const totalCarrito = carrito.reduce(
+        (acum, producto) => acum + producto.precio,
+        0
+    );
+    const cliente = localStorage.getItem("cliente");
+    try {const response = await fetch("/api/ventas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                cliente: cliente,
+                fecha: new Date(),
+                total: totalCarrito,
+                productos: productosAgrupados
+            })
+        });
+        if (!response.ok) {
+            throw new Error("Error al crear la venta");
+        }
+        const nuevaVenta = await response.json();
+        console.log("Venta creada:", nuevaVenta);
+    } catch (error) {
+        console.error("Error al finalizar la compra:", error);
+        alert("Error al finalizar la compra");
+    }
+});
 
 dibujarCarrito();

@@ -7,22 +7,21 @@
     <title>Dashboard Productos</title>
 </head>
 <body>
-    <nav>
-        <img src="img/logo.png" alt="Logo">
-        <h1>Mi Tienda</h1>
-        <p>Ariel Ragone | Matias Zunini</p>
-    </nav>
     <h1>Productos</h1>
-    <form action="/admin/productos" method="GET">
-        <select name="tipo">
-            <option value="">Todos</option>
-            <option value="Libro">Libros</option>
-            <option value="CD">CDs</option>
-        </select>
-        <input type="text" name="busqueda" placeholder="Buscar producto...">
-        <button type="submit">Filtrar</button>
-    </form>
+    <div class="admin-toolbar">
+        <form action="/admin/productos" method="GET">
+            <select name="tipo">
+                <option value="">Todos</option>
+                <option value="Libro">Libros</option>
+                <option value="CD">CDs</option>
+            </select>
+
+            <input type="text" name="busqueda" placeholder="Buscar producto...">
+            <button type="submit">Filtrar</button>
+        </form>
     <a href="/admin/alta"><button>Agregar Producto</button></a>
+    </div>
+    
     <table>
         <thead>
             <tr>
@@ -48,14 +47,23 @@
                 <td><%= producto.cantidadStock %></td>
                 <td><b><%= producto.activo == true ? "SI" : "NO" %></b></td>
                 <td><b><%= producto.id %></b></td>
-                <td><a href="/admin/editar/<%= producto.id %>"><button>Editar</button></a>
-                    <% if (producto.activo) { %> <form action="/admin/eliminar/<%= producto.id %>" method="POST">
-                        <button type="submit">Eliminar</button>
-                    </form> <% } else { %>
-                    <form action="/admin/activar/<%= producto.id %>" method="POST">
-                        <button type="submit">Activar</button>
-                    </form> <% } %>
-                </td>
+                <td>
+                <div class="acciones">
+                    <a href="/admin/editar/<%= producto.id %>">
+                        <button>Editar</button>
+                    </a>
+
+                    <% if (producto.activo) { %>
+                        <form action="/admin/eliminar/<%= producto.id %>" method="POST">
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    <% } else { %>
+                        <form action="/admin/activar/<%= producto.id %>" method="POST">
+                            <button type="submit">Activar</button>
+                        </form>
+                    <% } %>
+                </div>
+            </td>
             </tr>
             <% }) %>
         </tbody>

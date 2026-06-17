@@ -5,7 +5,7 @@
         "autor": "Robert Martin",
         "precio": 20000,
         "activo": true,
-        "img": "../img/cleancode.jpg",
+        "img": "/img/cleancode.jpg",
         "cantidadStock": 4 
     },
     {
@@ -14,7 +14,7 @@
         "artista": "Michael Jackson",
         "precio": 15000,
         "activo": true,
-        "img": "../img/thriller.jpg",
+        "img": "/img/thriller.jpg",
         "cantidadStock": 5
     },
     {
@@ -23,7 +23,7 @@
         "artista": "Green Day",
         "precio": 17000,
         "activo": true,
-        "img": "../img/greenday1.jpg",
+        "img": "/img/greenday1.jpg",
         "cantidadStock": 3
     },
     {
@@ -32,7 +32,7 @@
         "autor": "Jules Verne",
         "precio": 10500,
         "activo": true,
-        "img": "../img/julioverne1.jpg",
+        "img": "/img/julioverne1.jpg",
         "cantidadStock": 6
     },
         {
@@ -41,7 +41,7 @@
         "autor": "J. K. Rowling",
         "precio": 10000,
         "activo": true,
-        "img": "../img/harrypotter1.jpg",
+        "img": "/img/harrypotter1.jpg",
         "cantidadStock": 10
     },
     {
@@ -50,7 +50,7 @@
         "artista": "The Strokes",
         "precio": 13500,
         "activo": true,
-        "img": "../img/thestrokes1.jpg",
+        "img": "/img/thestrokes1.jpg",
         "cantidadStock": 5
     },
     {
@@ -59,7 +59,7 @@
         "artista": "Linkin Park",
         "precio": 22000,
         "activo": true,
-        "img": "../img/linkinpark1.jpg",
+        "img": "/img/linkinpark1.jpg",
         "cantidadStock": 2
     },
     {
@@ -68,7 +68,7 @@
         "autor": "J. K. Rowling",
         "precio": 10000,
         "activo": true,
-        "img": "../img/harrypotter2.jpg",
+        "img": "/img/harrypotter2.jpg",
         "cantidadStock": 10
     },
     {
@@ -77,7 +77,7 @@
         "autor": "J. R. R. Tolkien",
         "precio": 13000,
         "activo": true,
-        "img": "../img/tolkien1.jpg",
+        "img": "/img/tolkien1.jpg",
         "cantidadStock": 8
     },
     {
@@ -86,7 +86,7 @@
         "autor": "J. R. R. Tolkien",
         "precio": 13000,
         "activo": true,
-        "img": "../img/tolkien2.jpg",
+        "img": "/img/tolkien2.jpg",
         "cantidadStock": 8
     },
     {
@@ -95,7 +95,7 @@
         "autor": "J. R. R. Tolkien",
         "precio": 13000,
         "activo": true,
-        "img": "../img/tolkien3.jpg",
+        "img": "/img/tolkien3.jpg",
         "cantidadStock": 8
     },
     {
@@ -104,7 +104,7 @@
         "autor": "George Orwell",
         "precio": 11350,
         "activo": true,
-        "img": "../img/georgeorwell1.jpg",
+        "img": "/img/georgeorwell1.jpg",
         "cantidadStock": 2
     },
     {
@@ -113,7 +113,7 @@
         "artista": "Queen",
         "precio": 21500,
         "activo": true,
-        "img": "../img/queen1.jpg",
+        "img": "/img/queen1.jpg",
         "cantidadStock": 5
     }
 ]

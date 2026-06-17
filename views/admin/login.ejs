@@ -7,13 +7,7 @@
     <title>Login Admin</title>
 </head>
 <body>
-    <nav>
-        <img src="img/logo.png" alt="Logo">
-        <h1>Mi Tienda</h1>
-        <p>Ariel Ragone | Matias Zunini</p>
-        <a href="/">Cliente</a>
-    </nav>
-    <h1> <%= titulo %> </h1>
+    <h1> <%= title %> </h1>
     <form action="/admin/login" method="POST">
         <input type="email" name="email" placeholder="Correo" autocomplete="email" required>
         <input type="password" name="password" placeholder="Contraseña" required>
