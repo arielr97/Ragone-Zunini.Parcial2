@@ -59,7 +59,7 @@ const crearProducto = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(404).render("admin/error", { mensaje: "Producto no encontrado" });
+        return res.status(500).render("admin/error", { mensaje: "Error al crear el producto" });
     }
 };
 

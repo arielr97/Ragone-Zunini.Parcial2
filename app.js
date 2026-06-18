@@ -32,34 +32,36 @@ const routerAdmin = require("./routes/RouterAdmin");
 app.use("/api/productos", routerProductos);
 app.use("/api/ventas", routerVentas);
 app.use("/admin", routerAdmin);
+app.get("/", (req, res) => {
+    res.render("index");
+});
 
-sequelize.sync()
-    .then(async () => {
-        console.log("Base de datos sincronizada");
+sequelize.sync().then(async () => {
+    console.log("Base de datos sincronizada");
 
-        const adminExistente = await Admin.findOne({
-            where: { email: "ola@mail.asd" }
-        });
-
-        if (!adminExistente) {
-            const hash = await bcrypt.hash("admin123", 10);
-
-            await Admin.create({
-                email: "ola@mail.asd",
-                password: hash
-            });
-
-            console.log("Admin creado");
-        }
-
-        await Producto.destroy({ where: {}, truncate: true });
-
-        await cargarProductos();
-
-        app.listen(3000, () => {
-            console.log("Servidor iniciado en puerto 3000");
-        });
-    })
-    .catch((error) => {
-        console.error("Error al conectar la BD:", error);
+    const adminExistente = await Admin.findOne({
+        where: { email: "ola@mail.asd" }
     });
+
+    if (!adminExistente) {
+        const hash = await bcrypt.hash("admin123", 10);
+
+        await Admin.create({
+            email: "ola@mail.asd",
+            password: hash
+        });
+
+        console.log("Admin creado");
+    }
+
+    await Producto.destroy({ where: {}, truncate: true });
+
+    await cargarProductos();
+
+    app.listen(3000, () => {
+        console.log("Servidor iniciado en puerto 3000");
+    });
+})
+.catch((error) => {
+    console.error("Error al conectar la BD:", error);
+});
