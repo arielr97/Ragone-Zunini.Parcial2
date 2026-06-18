@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <title>Mi Tienda</title>
 </head>
+
 <body>
     <nav>
-        <img src="/uploads/${producto.img}" alt="${producto.nombre}">
+        <div class="nav-content">
+            <img src="img/logo.png" alt="Mi Tienda">
+            <h1>Mi Tienda</h1>
+            <p>Ariel Ragone | Matias Zunini</p>
 
-        <h1>Mi Tienda</h1>
-        <p>Ariel Ragone | Matias Zunini</p>
-
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="carrito.html">Carrito</a>
+            <a href="index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="carrito.html">Carrito</a>
+        </div>
     </nav>
+
     <main>
-        <select id="filtro-tipo">
-            <option value="">Todos</option>
-            <option value="Libro">Libros</option>
-            <option value="CD">CDs</option>
-        </select>
-        <select id="orden-precio">
-            <option value="">Sin ordenar</option>
-            <option value="asc">Precio menor a mayor</option>
-            <option value="desc">Precio mayor a menor</option>
-        </select>
-        <input type="text" id="busqueda" placeholder="Buscar producto...">
-        <button id="btn-buscar">Buscar</button>
-        <div id="contenedor-productos">
+        <div class="toolbar-filtros">
+            <select id="filtro-tipo">
+                <option value="">Todos</option>
+                <option value="Libro">Libros</option>
+                <option value="CD">CDs</option>
+            </select>
+
+            <select id="orden-precio">
+                <option value="">Sin ordenar</option>
+                <option value="asc">Precio menor a mayor</option>
+                <option value="desc">Precio mayor a menor</option>
+            </select>
+            <input type="text" id="busqueda" placeholder="Buscar producto...">
+            <button id="btn-buscar">Buscar</button>
+
+        </div>
+        <div id="contenedor-productos"></div>
+        <div id="paginacion">
+            <button id="anterior">Anterior</button>
+            <button id="siguiente">Siguiente</button>
+            <button onclick="window.location.href='carrito.html'">Ir al carrito</button>
         </div>
     </main>
-    <div id="paginacion">
-        <button id="anterior">Anterior</button>
-        <button id="siguiente">Siguiente</button>
-        <button onclick="window.location.href='carrito.html'">Ir al carrito</button>
-    </div>
     <script src="js/productos.js"></script>
 </body>
 </html>
