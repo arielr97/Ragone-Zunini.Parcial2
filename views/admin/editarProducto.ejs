@@ -9,7 +9,7 @@
 <body>
     <h1>Modificar Producto</h1>
     <h3>Producto a Editar:</h3>
-    <form action="/admin/editar/<%= producto.id %>" method="POST">
+    <form action="/admin/editar/<%= producto.id %>" method="POST" enctype="multipart/form-data">
         <label>Nombre:<input type="text" name="nombre" value="<%= producto.nombre %>" required></label><br>
         <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" required></label><br>
         <label>Imagen:<input type="file" name="img" value="<%= producto.img %>"></label><br>

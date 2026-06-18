@@ -10,6 +10,16 @@ const filtroTipo = document.getElementById("filtro-tipo");
 const inputBusqueda = document.getElementById("busqueda");
 const btnBuscar = document.getElementById("btn-buscar");
 const selectOrden = document.getElementById("orden-precio");
+const btnLimpiarBusqueda = document.getElementById("limpiar-busqueda");
+
+console.log({
+  btnSiguiente,
+  btnAnterior,
+  filtroTipo,
+  btnBuscar,
+  selectOrden,
+  btnLimpiarBusqueda
+});
 
 function crearTarjetaProducto(producto){
     console.log("PRODUCTO IMG:", producto.img);
@@ -101,6 +111,19 @@ btnBuscar.addEventListener("click", () => {
 selectOrden.addEventListener("change", () => {
     
     ordenPrecio = selectOrden.value;
+    paginaActual = 1;
+    traerProductos();
+});
+
+btnLimpiarBusqueda.addEventListener("click", () => {
+    textoBusqueda = "";
+    tipoSeleccionado = "";
+    ordenPrecio = "";
+
+    inputBusqueda.value = "";
+    filtroTipo.value = "";
+    selectOrden.value = "";
+
     paginaActual = 1;
     traerProductos();
 });

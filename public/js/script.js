@@ -1,4 +1,7 @@
 const formulario = document.getElementById("form-cliente");
+window.addEventListener("DOMContentLoaded", () => {
+    localStorage.removeItem("carrito");
+});
 
 formulario.addEventListener("submit", (e) =>{
 
