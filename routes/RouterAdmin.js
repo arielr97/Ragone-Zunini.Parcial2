@@ -9,6 +9,7 @@ const { Producto } = require("../models");
 const { listarProductosAdmin } = require("../controllers/adminController");
 const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto, activarProducto } = require("../controllers/productoController");
 const { verificarAdmin } = require("../controllers/adminController")
+const { randomUUID } = require("crypto");
 
 const uploadsPath = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadsPath)) {
@@ -22,7 +23,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const extension = path.extname(file.originalname);
 
-        cb(null, Date.now() + extension);
+        cb(null, randomUUID().replace(/-/g, "").slice(0, 16) + extension);
     }
 });
 
