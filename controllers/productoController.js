@@ -10,7 +10,7 @@ const listarProductos = async (req, res) => {
         const offset = (pagina - 1) * productosPorPagina;
         const tipo = req.query.tipo;
         const busqueda = req.query.busqueda;
-        const where = { activo: true };
+        const where = { activo: true , cantidadStock: {[Op.gt]: 0} };
         const orden = req.query.orden;
 
         if (tipo) {
