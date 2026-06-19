@@ -80,7 +80,6 @@ botonFinalizarCompra.addEventListener("click", async () => {
         alert("El carrito está vacío");
         return;
     }
-
     const productosAgrupados = [];
     carrito.forEach(producto => {
         const productoExistente = productosAgrupados.find(p => p.id === producto.id);
@@ -95,6 +94,10 @@ botonFinalizarCompra.addEventListener("click", async () => {
         0
     );
     const cliente = localStorage.getItem("cliente");
+    if (!cliente) {
+        alert("No hay cliente, vuelva al inicio e ingrese un nombre")
+        return;
+    }
     try {const response = await fetch("/api/ventas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -110,6 +113,8 @@ botonFinalizarCompra.addEventListener("click", async () => {
         }
         const nuevaVenta = await response.json();
         console.log("Venta creada:", nuevaVenta);
+        localStorage.removeItem("cliente");
+        window.location.href = "index.html";
     } catch (error) {
         console.error("Error al finalizar la compra:", error);
         alert("Error al finalizar la compra");
