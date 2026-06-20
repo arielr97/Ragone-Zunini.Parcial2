@@ -44,8 +44,8 @@ const verificarAdmin = async (req, res) => {
         if (!coincide) {
             return res.redirect("/admin");
         }
-        const payload = { id: admin.id, email: admin.email};
-        const token = jwt.sign(payload, "clave_super_secreta",{ expiresIn: "1h" });
+        const payload = { id: admin.id, email: admin.email };
+        const token = jwt.sign(payload, "clave_super_secreta", { expiresIn: "1h" });
 
         res.cookie("token", token, { httpOnly: true });
         return res.redirect("/admin/productos");
