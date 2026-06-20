@@ -34,11 +34,9 @@ const listarProductosAdmin = async (req, res) => {
 };
 
 const verificarAdmin = async (req, res) => {
-    console.log("Entró a verificarAdmin");
     const { email, password } = req.body;
     try {
         const admin = await Admin.findOne({ where: { email } });
-        console.log("Admin encontrado:", admin);
         if (!admin) {
             return res.redirect("/admin");
         }
@@ -46,7 +44,6 @@ const verificarAdmin = async (req, res) => {
         if (!coincide) {
             return res.redirect("/admin");
         }
-        console.log("Coincide:", coincide);
         const payload = { id: admin.id, email: admin.email};
         const token = jwt.sign(payload, "clave_super_secreta",{ expiresIn: "1h" });
 
