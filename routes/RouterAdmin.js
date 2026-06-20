@@ -8,7 +8,8 @@ const routerAdmin = express.Router();
 const { Producto } = require("../models");
 const { listarProductosAdmin } = require("../controllers/adminController");
 const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto, activarProducto } = require("../controllers/productoController");
-const { verificarAdmin } = require("../controllers/adminController")
+const { verificarAdmin } = require("../controllers/adminController");
+const { verificarToken } = require("../middlewares/validarAutenticacion");
 
 const uploadsPath = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadsPath)) {
@@ -36,7 +37,12 @@ routerAdmin.get("/", (req, res) => {
 
 routerAdmin.post("/login", verificarAdmin);
 
-routerAdmin.get("/productos", listarProductosAdmin);
+routerAdmin.get("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.redirect("/admin");
+});
+
+routerAdmin.get("/productos", verificarToken, listarProductosAdmin);
 
 routerAdmin.get("/alta", (req, res) => {
     res.render("admin/altaProducto", {

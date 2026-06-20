@@ -10,6 +10,8 @@ const sequelize = require("./config/database");
 
 const { Admin, Producto } = require("./models");
 
+const cookieParser = require("cookie-parser");
+
 app.set("view engine", "ejs");
 
 const expressLayouts = require("express-ejs-layouts");
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(cookieParser());
 
 const routerProductos = require("./routes/RouterProductos");
 const routerVentas = require("./routes/RouterVentas");
