@@ -10,6 +10,8 @@ const { listarProductosAdmin } = require("../controllers/adminController");
 const { crearProducto, actualizarProducto, obtenerProductoPorId, eliminarProducto, activarProducto } = require("../controllers/productoController");
 const { verificarAdmin } = require("../controllers/adminController");
 const { verificarToken } = require("../middlewares/validarAutenticacion");
+const { validarAltaProducto, validarEditarProducto } = require("../middlewares/validarProducto");
+const { validarLogin } = require("../middlewares/validarLogin");
 
 const uploadsPath = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadsPath)) {
@@ -35,7 +37,7 @@ routerAdmin.get("/", (req, res) => {
     });
 });
 
-routerAdmin.post("/login", verificarAdmin);
+routerAdmin.post("/login", validarLogin, verificarAdmin);
 
 routerAdmin.get("/logout", (req, res) => {
     res.clearCookie("token");
@@ -50,11 +52,11 @@ routerAdmin.get("/alta", (req, res) => {
     });
 });
 
-routerAdmin.post("/alta", upload.single("img"), crearProducto);
+routerAdmin.post("/alta", upload.single("img"), validarAltaProducto, crearProducto);
 
 routerAdmin.get("/editar/:id", obtenerProductoPorId);
 
-routerAdmin.post("/editar/:id", upload.single("img"), actualizarProducto);
+routerAdmin.post("/editar/:id", upload.single("img"), validarEditarProducto, actualizarProducto);
 
 routerAdmin.post("/eliminar/:id", eliminarProducto);
 
