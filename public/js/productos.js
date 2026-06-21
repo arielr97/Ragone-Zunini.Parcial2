@@ -52,6 +52,11 @@ function crearTarjetaProducto(producto){
 
 function agregarAlCarrito(producto){
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const cantidadEnCarrito = carrito.filter(p => p.id === producto.id).length;
+    if (cantidadEnCarrito >= producto.cantidadStock) {
+        alert(`Solo hay ${producto.cantidadStock} unidades disponibles`);
+        return;
+    }
     carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }

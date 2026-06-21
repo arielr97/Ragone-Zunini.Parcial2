@@ -21,9 +21,11 @@
   "homepage": "https://github.com/arielr97/Ragone-Zunini.Parcial2#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^9.0.3",
     "multer": "^2.2.0",
     "sequelize": "^6.37.8",
     "sqlite3": "^6.0.1"
