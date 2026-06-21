@@ -12,10 +12,46 @@
     <h3>Producto a Editar:</h3>
     <form action="/admin/editar/<%= producto.id %>" method="POST" enctype="multipart/form-data">
         <label>Nombre:<input type="text" name="nombre" value="<%= producto.nombre %>" required></label><br>
-        <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" required></label><br>
+        <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" min="0.01" step="0.01" required></label><br>
         <label>Imagen:<input type="file" name="img" value="<%= producto.img %>"></label><br>
-        <label>Cantidad Stock:<input type="number" name="cantidadStock" value="<%= producto.cantidadStock %>"></label><br>
-        <button type="submit">Guardar Cambios</button>
+        <label>Cantidad Stock:<input type="number" name="cantidadStock" value="<%= producto.cantidadStock %>" min="0"></label><br>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+            <option value="Libro">Libro</option>
+            <option value="CD" <%= producto.tipo == "CD" ? 'selected' : null %>>CD</option>
+        </select><br>
+        <div id="div-autor-editar">
+            <label for="autor-input-editar">Autor:</label>
+            <input type="text" name="autor" id="autor-input-editar" placeholder="Nombre del autor" value="<%= producto.autor %>">
+        </div>
+        <div id="div-artista-editar">
+            <label for="artista-input-editar">Artista:</label>
+            <input type="text" name="artista" id="artista-input-editar" placeholder="Nombre del artista" value="<%= producto.artista %>">
+        </div>
+        <button type="submit">Guardar Cambios</button><a href="/admin/productos"><button type="button">Volver al listado</button></a>
     </form>
+    <script>
+    const tipo = document.getElementById("tipo");
+    const divAutor = document.getElementById("div-autor-editar");
+    const divArtista = document.getElementById("div-artista-editar");
+    const autorInput = document.getElementById("autor-input-editar");
+    const artistaInput = document.getElementById("artista-input-editar");
+
+    function cambioTipo(){
+        if (tipo.value === "Libro") {
+            divAutor.style.display = "flex";
+            divArtista.style.display = "none";
+            autorInput.required = true;
+            artistaInput.required = false;
+        } else {
+            divAutor.style.display = "none";
+            divArtista.style.display = "flex"; 
+            autorInput.required = false;
+            artistaInput.required = true;
+        }
+    }
+    cambioTipo();
+    tipo.addEventListener("change", cambioTipo);
+</script>
 </body>
 </html>

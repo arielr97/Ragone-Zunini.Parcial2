@@ -17,7 +17,7 @@
 
             <div class="form-row">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre">
+                <input type="text" id="nombre" name="nombre" required>
             </div>
 
             <div class="form-row">
@@ -40,7 +40,7 @@
 
             <div class="form-row">
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" required placeholder="0.00" min="0" step="0.01">
+                <input type="number" id="precio" name="precio" required placeholder="0.01" min="0.01" step="0.01">
             </div>
 
             <div class="form-row">
@@ -56,6 +56,7 @@
             </div>
 
             <button type="submit" class="btn-submit">Guardar Producto</button>
+            <a href="/admin/productos"><button type="button" class="btn-submit">Volver al listado</button></a>
         </form>
     </div>
 </main>
