@@ -109,7 +109,9 @@ botonFinalizarCompra.addEventListener("click", async () => {
             })
         });
         if (!response.ok) {
-            throw new Error("Error al crear la venta");
+            const error = await response.json();
+            alert(error.message);
+            return;
         }
         const nuevaVenta = await response.json();
         console.log("Venta creada:", nuevaVenta);
