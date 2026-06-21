@@ -116,8 +116,8 @@ botonFinalizarCompra.addEventListener("click", async () => {
         const nuevaVenta = await response.json();
         console.log("Venta creada:", nuevaVenta);
         localStorage.removeItem("cliente");
-        const alerta = alert("¡Ha finalizado su compra! Volviendo al inicio...")
-        window.location.href = "index.html";
+        const alerta = alert("¡Ha finalizado su compra! Yendo al ticket...");
+        window.location.href = "ticket.html";
     } catch (error) {
         console.error("Error al finalizar la compra:", error);
         alert("Error al finalizar la compra");

@@ -4,6 +4,7 @@ const app = express();
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
+const puppeteer = require("puppeteer");
 
 const cargarProductos = require("./seedProductos");
 const sequelize = require("./config/database");

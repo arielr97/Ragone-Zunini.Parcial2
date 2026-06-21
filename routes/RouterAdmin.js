@@ -12,6 +12,7 @@ const { verificarAdmin } = require("../controllers/adminController");
 const { verificarToken } = require("../middlewares/validarAutenticacion");
 const { validarAltaProducto, validarEditarProducto } = require("../middlewares/validarProducto");
 const { validarLogin } = require("../middlewares/validarLogin");
+const { randomUUID } = require("crypto");
 
 const uploadsPath = path.join(__dirname, "../public/uploads");
 if (!fs.existsSync(uploadsPath)) {

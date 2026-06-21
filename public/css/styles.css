@@ -288,3 +288,35 @@ button:hover {
     height: 50px;
     object-fit: contain;
 }
+
+.ticket{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pedido{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-ticket{
+    display: flex;
+    justify-content: space-between;
+    width: 350px; 
+}
+
+.nombre-producto{
+    width: 250px;
+}
+
+.ticket hr{
+    width: 350px; 
+    margin: 15px 0;
+}
+
+.total{
+    width: 350px;
+    text-align: center;
+}
