@@ -138,9 +138,11 @@ sequelize.sync().then(async () => {
         console.log("Admin creado");
     }
 
-    await Producto.destroy({ where: {}, truncate: true });
+    const count = await Producto.count();
 
-    await cargarProductos();
+    if (count === 0) {
+        await cargarProductos();
+    }
 
     app.listen(3000, () => {
         console.log("Servidor iniciado en puerto 3000");
