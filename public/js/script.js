@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme");
+    const root = document.documentElement;
 
-    if (savedTheme === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-        document.documentElement.removeAttribute("data-theme");
-    }
+    const savedTheme = localStorage.getItem("theme") || "light";
+
+    applyTheme(savedTheme);
 
     if (window.location.pathname.endsWith("index.html")) {
         localStorage.removeItem("carrito");
@@ -13,18 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btn = document.getElementById("toggle-theme");
 
+    function updateIcon() {
+        if (!btn) return;
+
+        const theme = root.getAttribute("data-theme");
+        btn.textContent = theme === "dark" ? "Modo 🌙" : "Modo ☀️";
+    }
+
+    function applyTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }
+
     if (btn) {
+        updateIcon();
+
         btn.addEventListener("click", () => {
-            const root = document.documentElement;
             const current = root.getAttribute("data-theme");
 
-            if (current === "dark") {
-                root.removeAttribute("data-theme");
-                localStorage.setItem("theme", "light");
-            } else {
-                root.setAttribute("data-theme", "dark");
-                localStorage.setItem("theme", "dark");
-            }
+            applyTheme(current === "dark" ? "light" : "dark");
+            updateIcon();
         });
     }
 
