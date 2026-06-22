@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Venta</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<main class="admin-main">
+
+<div class="form-container">
+
+    <h2>Detalle de Venta #<%= venta.id %></h2>
+
+    <p><strong>Cliente:</strong> <%= venta.cliente %></p>
+    <p><strong>Fecha:</strong> <%= new Date(venta.fecha).toLocaleString("es-AR") %></p>
+    <p><strong>Total:</strong> $<%= venta.total %></p>
+
+    <hr>
+
+    <h3>Productos</h3>
+
+    <% venta.productos.forEach(p => { %>
+        <div style="display:flex; justify-content:space-between; margin:8px 0;">
+            <span>
+                <%= p.nombre %> (x<%= p.VentaProducto.cantidad %>)
+            </span>
+
+            <span>
+                $<%= p.precio * p.VentaProducto.cantidad %>
+            </span>
+        </div>
+    <% }) %>
+
+    <hr>
+
+    <a href="/admin/ventas">
+        <button class="btn-submit">Volver</button>
+    </a>
+
+</div>
+
+</main>
+
+</body>
+</html>

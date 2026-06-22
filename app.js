@@ -84,7 +84,8 @@ app.get("/ticket/:id/pdf", async (req, res) => {
                 </div>
             `;
         });
-
+        
+        const fechaFormateada = venta.fecha.toLocaleString("es-AR");
         const html = `
         <html>
         <body style="font-family:Arial; text-align:center;">
@@ -92,7 +93,7 @@ app.get("/ticket/:id/pdf", async (req, res) => {
             <h2>Ticket de Compra</h2>
 
             <p>Cliente: ${venta.cliente}</p>
-            <p>Fecha: ${new Date(venta.fecha).toLocaleString()}</p>
+            <p>Fecha: ${fechaFormateada}</p>
 
             <hr style="width:300px;">
 

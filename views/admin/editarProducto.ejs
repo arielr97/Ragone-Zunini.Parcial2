@@ -4,54 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Editar Producto</title>
+    <title>Editar producto</title>
     <link rel="icon" type="image/x-icon" href="/img/logo.ico">
 </head>
 <body>
-    <h1>Modificar Producto</h1>
-    <h3>Producto a Editar:</h3>
-    <form action="/admin/editar/<%= producto.id %>" method="POST" enctype="multipart/form-data">
-        <label>Nombre:<input type="text" name="nombre" value="<%= producto.nombre %>" required></label><br>
-        <label>Precio:<input type="number" name="precio" value="<%= producto.precio %>" min="0.01" step="0.01" required></label><br>
-        <label>Imagen:<input type="file" name="img" value="<%= producto.img %>"></label><br>
-        <label>Cantidad Stock:<input type="number" name="cantidadStock" value="<%= producto.cantidadStock %>" min="0"></label><br>
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo">
-            <option value="Libro">Libro</option>
-            <option value="CD" <%= producto.tipo == "CD" ? 'selected' : null %>>CD</option>
-        </select><br>
-        <div id="div-autor-editar">
-            <label for="autor-input-editar">Autor:</label>
-            <input type="text" name="autor" id="autor-input-editar" placeholder="Nombre del autor" value="<%= producto.autor %>">
-        </div>
-        <div id="div-artista-editar">
-            <label for="artista-input-editar">Artista:</label>
-            <input type="text" name="artista" id="artista-input-editar" placeholder="Nombre del artista" value="<%= producto.artista %>">
-        </div>
-        <button type="submit">Guardar Cambios</button><a href="/admin/productos"><button type="button">Volver al listado</button></a>
-    </form>
-    <script>
-    const tipo = document.getElementById("tipo");
-    const divAutor = document.getElementById("div-autor-editar");
-    const divArtista = document.getElementById("div-artista-editar");
-    const autorInput = document.getElementById("autor-input-editar");
-    const artistaInput = document.getElementById("artista-input-editar");
 
-    function cambioTipo(){
-        if (tipo.value === "Libro") {
-            divAutor.style.display = "flex";
-            divArtista.style.display = "none";
-            autorInput.required = true;
-            artistaInput.required = false;
-        } else {
-            divAutor.style.display = "none";
-            divArtista.style.display = "flex"; 
-            autorInput.required = false;
-            artistaInput.required = true;
-        }
-    }
-    cambioTipo();
-    tipo.addEventListener("change", cambioTipo);
-</script>
+<main class="admin-main">
+
+    <div class="form-container">
+        <h2>Editar Producto</h2>
+
+        <form action="/admin/editar/<%= producto.id %>" method="POST" enctype="multipart/form-data" class="form-admin">
+
+            <div class="form-row">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="<%= producto.nombre %>" required>
+            </div>
+
+            <div class="form-row">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" value="<%= producto.precio %>" min="0.01" step="0.01" required>
+            </div>
+
+            <div class="form-row">
+                <label for="img">Imagen:</label>
+                <input type="file" id="img" name="img">
+            </div>
+
+            <div class="form-row">
+                <label for="cantidadStock">Stock:</label>
+                <input type="number" id="cantidadStock" name="cantidadStock" value="<%= producto.cantidadStock %>" min="0">
+            </div>
+
+            <div class="form-row">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo">
+                    <option value="Libro" <%= producto.tipo == "Libro" ? 'selected' : '' %>>Libro</option>
+                    <option value="CD" <%= producto.tipo == "CD" ? 'selected' : '' %>>CD</option>
+                </select>
+            </div>
+
+            <div id="div-autor-editar" class="form-row">
+                <label for="autor-input-editar">Autor:</label>
+                <input type="text" name="autor" id="autor-input-editar" value="<%= producto.autor %>">
+            </div>
+
+            <div id="div-artista-editar" class="form-row">
+                <label for="artista-input-editar">Artista:</label>
+                <input type="text" name="artista" id="artista-input-editar" value="<%= producto.artista %>">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Guardar Producto</button>
+                <a href="/admin/productos"><button type="button" class="btn-submit">Volver al listado</button></a>
+            </div>
+
+        </form>
+    </div>
+
+</main>
+
 </body>
 </html>

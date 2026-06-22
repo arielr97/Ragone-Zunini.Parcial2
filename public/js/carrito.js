@@ -27,7 +27,6 @@ function crearTarjetaCarrito(producto){
     boton.addEventListener("click", () => {
         quitarDelCarrito(producto);
     });
-
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(img);
     tarjeta.appendChild(precio);

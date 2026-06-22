@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Ventas</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.ico">
+</head>
+<body>
+
+<main class="admin-main">
+
+    <div class="form-container">
+
+        <h2>Ventas registradas</h2>
+
+        <% if (!ventas || ventas.length === 0) { %>
+            <p>No hay ventas registradas.</p>
+        <% } else { %>
+
+        <table class="tabla-ventas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% ventas.forEach(v => { %>
+                    <tr>
+                        <td><%= v.id %></td>
+                        <td><%= new Date(v.fecha).toLocaleString("es-AR") %></td>
+                        <td>$<%= v.total %></td>
+                        <td>
+                            <a href="/admin/ventas/<%= v.id %>" class="btn-detalle">Ver detalle.</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <% } %>
+
+    </div>
+
+</main>
+
+</body>
+</html>
