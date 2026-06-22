@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title><%= title %></title>
+
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" type="image/x-icon" href="/img/logo.ico">
+
+    <script>
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    </script>
+
+    <script defer src="/js/script.js"></script>
 </head>
+
 <body>
     <%- include('partials/nav', { showClienteLink: false }) %>
 
     <main class="container">
         <%- body %>
     </main>
-
 </body>
 </html>

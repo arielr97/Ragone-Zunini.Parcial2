@@ -1,13 +1,45 @@
-const formulario = document.getElementById("form-cliente");
-window.addEventListener("DOMContentLoaded", () => {
-    localStorage.removeItem("carrito");
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
 
-formulario.addEventListener("submit", (e) =>{
+    if (savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+        document.documentElement.removeAttribute("data-theme");
+    }
 
-    e.preventDefault();
-    const nombre = document.getElementById("nombre-cliente").value;
-    localStorage.setItem("cliente", nombre);
+    if (window.location.pathname.endsWith("index.html")) {
+        localStorage.removeItem("carrito");
+    }
 
-    window.location.href = "productos.html";
+    const btn = document.getElementById("toggle-theme");
+
+    if (btn) {
+        btn.addEventListener("click", () => {
+            const root = document.documentElement;
+            const current = root.getAttribute("data-theme");
+
+            if (current === "dark") {
+                root.removeAttribute("data-theme");
+                localStorage.setItem("theme", "light");
+            } else {
+                root.setAttribute("data-theme", "dark");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+    }
+
+    const formulario = document.getElementById("form-cliente");
+
+    if (formulario) {
+        formulario.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById("nombre-cliente")?.value;
+
+            if (nombre) {
+                localStorage.setItem("cliente", nombre);
+                window.location.href = "productos.html";
+            }
+        });
+    }
 });
