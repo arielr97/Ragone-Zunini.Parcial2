@@ -27,7 +27,6 @@ function crearTarjetaCarrito(producto){
     boton.addEventListener("click", () => {
         quitarDelCarrito(producto);
     });
-
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(img);
     tarjeta.appendChild(precio);
@@ -40,7 +39,7 @@ function crearTarjetaCarrito(producto){
 function quitarDelCarrito(producto){
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     const indice = carrito.findIndex(elem => elem.id === producto.id);
-    console.log("indice: " + indice);
+
     if (indice !== -1) {
         carrito.splice(indice, 1);
     }
@@ -80,15 +79,16 @@ botonFinalizarCompra.addEventListener("click", async () => {
         alert("El carrito está vacío");
         return;
     }
-    const productosAgrupados = [];
-    carrito.forEach(producto => {
-        const productoExistente = productosAgrupados.find(p => p.id === producto.id);
-        if (productoExistente) {
-            productoExistente.cantidad++;
-        } else {
-            productosAgrupados.push({ id: producto.id, cantidad: 1});
+    const productosAgrupados = Object.values(carrito.reduce((acc, producto) => {
+        if (!acc[producto.id]) {
+            acc[producto.id] = {
+                id: producto.id,
+                cantidad: 0
+            };
         }
-    });
+        acc[producto.id].cantidad++;
+        return acc;
+        }, {}));
     const totalCarrito = carrito.reduce(
         (acum, producto) => acum + producto.precio,
         0
@@ -113,11 +113,13 @@ botonFinalizarCompra.addEventListener("click", async () => {
             alert(error.message);
             return;
         }
+
         const nuevaVenta = await response.json();
-        console.log("Venta creada:", nuevaVenta);
+        localStorage.setItem("ventaId", nuevaVenta.id);
+
         localStorage.removeItem("cliente");
-        const alerta = alert("¡Ha finalizado su compra! Volviendo al inicio...")
-        window.location.href = "index.html";
+        alert("¡Ha finalizado su compra! Yendo al ticket...");
+        window.location.href = "ticket.html";
     } catch (error) {
         console.error("Error al finalizar la compra:", error);
         alert("Error al finalizar la compra");

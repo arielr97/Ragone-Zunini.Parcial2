@@ -5,23 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <title>Mi Tienda</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.ico">
 </head>
 <body>
     <nav>
         <div class="nav-content">
-            <img src="img/logo.png" alt="Mi Tienda">
+            <img src="img/logo.ico" alt="Mi Tienda" class="logo">
             <h1>Mi Tienda</h1>
             <p>Ariel Ragone | Matias Zunini</p>
 
             <a href="index.html">Inicio</a>
             <a href="productos.html">Productos</a>
             <a href="carrito.html">Carrito</a>
+            <button id="toggle-theme">Cambiar tema</button>
         </div>
     </nav>
     
     <main>
+        <div class="ticket">
+            <h1>¡Gracias por su compra!</h1>
+            <h2>Ticket de Compra:</h2>
 
+            <div id="pedido"></div>
+            <hr>
+
+            <h2>
+                Total: $<span id="total">0</span>
+            </h2>
+        </div>
+        <button id="btn-descargar">Descargar PDF</button>
     </main>
-
+    <script src="/js/ticket.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

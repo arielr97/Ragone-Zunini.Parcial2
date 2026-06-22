@@ -9,7 +9,8 @@ const Venta = sequelize.define("Venta", {
 
     fecha: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: DataTypes.NOW
     },
 
     total: {

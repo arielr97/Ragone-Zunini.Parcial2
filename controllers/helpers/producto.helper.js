@@ -1,5 +1,4 @@
 const construirProducto = (data, base = {}) => {
-    console.log("DATA RECIBIDA:", data);
     const {
         tipo,
         nombre,

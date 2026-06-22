@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <title>Mi Tienda</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.ico">
 </head>
 <body>
     <nav>
         <div class="nav-content">
-            <img src="img/logo.png" alt="Mi Tienda">
+            <img src="img/logo.ico" alt="Mi Tienda" class="logo">
             <h1>Mi Tienda</h1>
             <p>Ariel Ragone | Matias Zunini</p>
 
             <a href="index.html">Inicio</a>
             <a href="productos.html">Productos</a>
             <a href="carrito.html">Carrito</a>
+            <button id="toggle-theme">Cambiar tema</button>
         </div>
     </nav>
+
     <main>
         <h1>Carrito</h1>
         <div id="contenedor-carrito">
@@ -27,5 +30,6 @@
         <button type="button" id="finalizar-compra">Finalizar Compra</button>
     </main>
     <script src="/js/carrito.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

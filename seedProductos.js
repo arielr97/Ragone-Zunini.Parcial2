@@ -10,7 +10,6 @@ async function cargarProductos() {
 
         const count = await Producto.count();
         if (count > 0) {
-            console.log("Ya existen productos, seed cancelado");
             return;
         }
 
@@ -33,8 +32,6 @@ async function cargarProductos() {
         }));
 
         await Producto.bulkCreate(productosFormateados);
-
-        console.log("Productos cargados correctamente");
 
     } catch (error) {
         console.error("Error en seed:", error);

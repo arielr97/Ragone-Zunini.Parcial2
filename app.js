@@ -4,11 +4,12 @@ const app = express();
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const path = require("path");
+const puppeteer = require("puppeteer");
 
 const cargarProductos = require("./seedProductos");
 const sequelize = require("./config/database");
 
-const { Admin, Producto } = require("./models");
+const { Admin, Producto, Venta } = require("./models");
 
 const cookieParser = require("cookie-parser");
 
@@ -37,6 +38,86 @@ app.use("/api/ventas", routerVentas);
 app.use("/admin", routerAdmin);
 app.get("/", (req, res) => {
     res.render("index");
+});
+
+app.get("/ticket/:id/pdf", async (req, res) => {
+    try {
+        const venta = await Venta.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Producto,
+                    as: "productos",
+                    through: { attributes: ["cantidad"] }
+                }
+            ]
+        });
+
+        if (!venta) {
+            return res.status(404).send("Venta no encontrada");
+        }
+
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        let itemsHTML = "";
+        let total = 0;
+        
+        venta.productos.forEach(p => {
+            const cantidad = p.VentaProducto.cantidad;
+            const subtotal = p.precio * cantidad;
+            total += subtotal;
+
+            itemsHTML += `
+                <div style="
+                    display:flex;
+                    width:320px;
+                    margin:5px auto;
+                    font-family: monospace;
+                ">
+                    <div style="flex:1; text-align:left;">
+                        ${p.nombre} x${cantidad}
+                    </div>
+
+                    <div style="width:100px; text-align:right;">
+                        $${subtotal}
+                    </div>
+                </div>
+            `;
+        });
+        
+        const fechaFormateada = venta.fecha.toLocaleString("es-AR");
+        const html = `
+        <html>
+        <body style="font-family:Arial; text-align:center;">
+
+            <h2>Ticket de Compra</h2>
+
+            <p>Cliente: ${venta.cliente}</p>
+            <p>Fecha: ${fechaFormateada}</p>
+
+            <hr style="width:300px;">
+
+            ${itemsHTML}
+
+            <hr style="width:300px;">
+
+            <h3>Total: $${total}</h3>
+
+        </body>
+        </html>
+        `;
+
+        await page.setContent(html, { waitUntil: "networkidle0" });
+        const pdf = await page.pdf({format: "A4", printBackground: true});
+        await browser.close();
+
+        res.setHeader("Content-Type", "application/pdf");
+        res.setHeader("Content-Disposition", `attachment; filename=ticket-${venta.id}.pdf`);
+        res.send(pdf);
+    } catch (error) {
+        console.error("ERROR PDF:", error);
+        res.status(500).send(error.message);
+    }
 });
 
 sequelize.sync().then(async () => {

@@ -1,9 +1,8 @@
-//const { Venta, Producto } = require("../models");
 const { Venta, Producto, VentaProducto } = require("../models");
 
 const crearVenta = async (req, res) => {
     try {
-        const { cliente, fecha, total, productos } = req.body;
+        const { cliente, total, productos } = req.body;
 
         if (!productos || productos.length === 0) {
             return res.status(400).json({
@@ -22,16 +21,24 @@ const crearVenta = async (req, res) => {
             }
         }
 
-        const nuevaVenta = await Venta.create({ cliente, fecha, total});
+        const nuevaVenta = await Venta.create({ cliente, total});
+
+        console.log("VENTA CREADA:", nuevaVenta.id);
+        console.log("PRODUCTOS RECIBIDOS:", productos);
 
         for (const item of productos) {
+            console.log("ITEM:", item);
             const producto = await Producto.findByPk(item.id);
+            console.log("PRODUCTO ENCONTRADO:", producto?.id);
             await nuevaVenta.addProducto(producto, { through: { cantidad: item.cantidad } });
+            console.log("RELACION CREADA");
             producto.cantidadStock -= item.cantidad;
             await producto.save();
         }
 
-        res.status(201).json(nuevaVenta);
+        res.status(201).json({
+            id: nuevaVenta.id
+        });
 
     } catch (error) {
         res.status(400).json({ message: "Error al crear la venta", error: error.message });
@@ -40,12 +47,6 @@ const crearVenta = async (req, res) => {
 
 const obtenerVentas = async (req, res) => {
     try {
-        const registros = await VentaProducto.findAll();
-
-        console.log("VENTAPRODUCTOS:");
-        console.log(JSON.stringify(registros, null, 2));
-
-
         const resultado = await Venta.findAndCountAll({ include: [
                 {
                     model: Producto,
@@ -65,6 +66,7 @@ const obtenerVentaPorId = async (req, res) => {
         const venta = await Venta.findByPk(req.params.id,{ include: [
                     {
                         model: Producto,
+                        as: "productos",
                         through: {
                             attributes: ["cantidad"]
                         }
