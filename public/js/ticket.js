@@ -7,6 +7,7 @@ const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const productosAgrupados = {};
 let total = 0;
 
+
 carrito.forEach(producto => {
 
     if (!productosAgrupados[producto.id]) {
@@ -41,7 +42,13 @@ Object.values(productosAgrupados).forEach(producto => {
 });
 
 btnDescargar.addEventListener("click", () => {
-    window.open("/ticket/pdf", "_blank");
+    const ventaId = localStorage.getItem("ventaId");
+
+    if (!ventaId) {
+        alert("No hay venta para generar ticket");
+        return;
+    }
+    window.open(`/ticket/${ventaId}/pdf`, "_blank");
 });
 
 totalHTML.textContent = total.toLocaleString("es-AR");

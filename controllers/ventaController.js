@@ -1,4 +1,3 @@
-//const { Venta, Producto } = require("../models");
 const { Venta, Producto, VentaProducto } = require("../models");
 
 const crearVenta = async (req, res) => {
@@ -31,7 +30,9 @@ const crearVenta = async (req, res) => {
             await producto.save();
         }
 
-        res.status(201).json(nuevaVenta);
+        res.status(201).json({
+            id: nuevaVenta.id
+        });
 
     } catch (error) {
         res.status(400).json({ message: "Error al crear la venta", error: error.message });
@@ -41,10 +42,6 @@ const crearVenta = async (req, res) => {
 const obtenerVentas = async (req, res) => {
     try {
         const registros = await VentaProducto.findAll();
-
-        console.log("VENTAPRODUCTOS:");
-        console.log(JSON.stringify(registros, null, 2));
-
 
         const resultado = await Venta.findAndCountAll({ include: [
                 {

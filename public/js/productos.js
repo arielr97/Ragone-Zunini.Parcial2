@@ -12,24 +12,13 @@ const btnBuscar = document.getElementById("btn-buscar");
 const selectOrden = document.getElementById("orden-precio");
 const btnLimpiarBusqueda = document.getElementById("limpiar-busqueda");
 
-console.log({
-  btnSiguiente,
-  btnAnterior,
-  filtroTipo,
-  btnBuscar,
-  selectOrden,
-  btnLimpiarBusqueda
-});
-
 function crearTarjetaProducto(producto){
-    console.log("PRODUCTO IMG:", producto.img);
     const tarjeta = document.createElement("div");
     tarjeta.classList.add("producto");
     const titulo = document.createElement("h3");
     titulo.textContent = producto.nombre
     const art = document.createElement("h5");
     producto.artista ? art.textContent = producto.artista : art.textContent = producto.autor;
-    console.log(producto.nombre, producto.img);
     const img = document.createElement("img");
     img.src = producto.img;
     img.alt = producto.nombre;
