@@ -27,8 +27,18 @@ function crearTarjetaProducto(producto){
     const boton = document.createElement("button");
     boton.textContent = "Agregar al carrito";
     boton.addEventListener("click", () => {
-        agregarAlCarrito(producto);
+        const agregado = agregarAlCarrito(producto);
+        if (!agregado) {
+            return;
+        }
+        boton.textContent = "¡Agregado!";
+        boton.classList.add("agregado");
+        setTimeout(() => {
+            boton.textContent = "Agregar al carrito";
+            boton.classList.remove("agregado");
+        }, 1000);
     });
+    boton.classList.add("btn-agregar-al-carrito")
 
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(art);
@@ -44,10 +54,11 @@ function agregarAlCarrito(producto){
     const cantidadEnCarrito = carrito.filter(p => p.id === producto.id).length;
     if (cantidadEnCarrito >= producto.cantidadStock) {
         alert(`Solo hay ${producto.cantidadStock} unidades disponibles`);
-        return;
+        return false;
     }
     carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    return true;
 }
 
 

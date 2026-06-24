@@ -49,6 +49,7 @@ btnDescargar.addEventListener("click", () => {
         return;
     }
     window.open(`/ticket/${ventaId}/pdf`, "_blank");
+    window.location.href = "index.html";
 });
 
 totalHTML.textContent = total.toLocaleString("es-AR");
