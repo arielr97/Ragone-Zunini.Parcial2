@@ -505,6 +505,15 @@ button:hover {
     color: var(--bg);
 }
 
+#main-inicio{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;     
+    min-height: 80vh;       
+    text-align: center;
+    margin-top: 50px;
+}
+
 
 @media (max-width: 768px){
     html, body {
