@@ -233,6 +233,16 @@ button:hover {
     color: var(--bg);
 }
 
+.producto button:active {
+    transform: scale(0.95);
+}
+
+.producto button.agregado {
+    background: #00c853;
+    border-color: #00c853;
+    color: white;
+}
+
 #paginacion {
     display: flex;
     justify-content: center;
@@ -272,6 +282,14 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.cont-botones-carrito{
+    display: flex;
+    justify-content: center;
+}
+.cont-botones-carrito button{
+    min-width: 40px;
 }
 
 .acciones {

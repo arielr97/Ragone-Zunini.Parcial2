@@ -22,16 +22,25 @@ function crearTarjetaCarrito(producto){
     const cantidad = document.createElement("p");
     let listaCarrito = JSON.parse(localStorage.getItem("carrito"));
     cantidad.textContent = `Cantidad: ${contarElementoReduce(listaCarrito, producto)}`
-    const boton = document.createElement("button");
-    boton.textContent = "Quitar del carrito";
-    boton.addEventListener("click", () => {
+    const contBotones = document.createElement("div");
+    contBotones.classList.add("cont-botones-carrito");
+    const botonQuitar = document.createElement("button");
+    botonQuitar.textContent = "-";
+    botonQuitar.addEventListener("click", () => {
         quitarDelCarrito(producto);
     });
+    const botonAgregar = document.createElement("button");
+    botonAgregar.textContent = "+";
+    botonAgregar.addEventListener("click", () => {
+        agregarAlCarrito(producto);
+    });
+    contBotones.appendChild(botonQuitar);
+    contBotones.appendChild(botonAgregar);
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(img);
     tarjeta.appendChild(precio);
     tarjeta.appendChild(cantidad);
-    tarjeta.appendChild(boton);
+    tarjeta.appendChild(contBotones);
 
     return tarjeta;
 }
@@ -45,6 +54,17 @@ function quitarDelCarrito(producto){
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
     dibujarCarrito();
+}
+function agregarAlCarrito(producto){
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const cantidadEnCarrito = carrito.filter(p => p.id === producto.id).length;
+    if (cantidadEnCarrito >= producto.cantidadStock) {
+        alert(`Solo hay ${producto.cantidadStock} unidades disponibles`);
+        return;
+    }
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    dibujarCarrito()
 }
 
 function dibujarCarrito(){
@@ -74,6 +94,10 @@ botonVaciarCarrito.addEventListener("click", () => {
 })
 
 botonFinalizarCompra.addEventListener("click", async () => {
+    const confirmar = confirm("¿Desea confirmar la compra?");
+    if (!confirmar) {
+        return;
+    }
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     if (carrito.length === 0) {
         alert("El carrito está vacío");

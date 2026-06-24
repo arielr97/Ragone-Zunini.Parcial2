@@ -10,6 +10,7 @@ const listarProductosAdmin = async (req, res) => {
         const tipo = req.query.tipo;
         const busqueda = req.query.busqueda;
         const where = {};
+        const activo = req.query.activo;
 
         if (tipo) {
             where.tipo = tipo
@@ -23,9 +24,21 @@ const listarProductosAdmin = async (req, res) => {
                 { id: { [Op.like]: `%${busqueda}%` }}
             ];
         }
+
+        if (activo === "true") {
+            where.activo = true;
+        }
+
+        if (activo === "false") {
+            where.activo = false;
+        }
+
         const productos = await Producto.findAll({ where });
         res.render("admin/productos", {
-            productos: productos
+            productos: productos,
+            tipoSeleccionado: tipo,
+            busquedaActual: busqueda,
+            activoSeleccionado: activo
         });
 
     } catch (error) {

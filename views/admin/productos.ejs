@@ -18,8 +18,12 @@
                 <option value="Libro">Libros</option>
                 <option value="CD">CDs</option>
             </select>
-
             <input type="text" name="busqueda" placeholder="Buscar producto...">
+            <select name="activo">
+                <option value="">Todos</option>
+                <option value="true">Activos</option>
+                <option value="false">Inactivos</option>
+            </select>
             <button type="submit">Filtrar</button>
         </form>
     <a href="/admin/alta"><button>Agregar Producto</button></a>
