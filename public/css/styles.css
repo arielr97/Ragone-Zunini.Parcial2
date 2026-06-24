@@ -504,3 +504,58 @@ button:hover {
     background: var(--primary);
     color: var(--bg);
 }
+
+
+@media (max-width: 768px){
+    html, body {
+        max-width: 100%;
+    }
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    input, select, button {
+        width: 90%;
+        margin-bottom: 5px;
+    }
+    #contenedor-productos{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        gap: 5px;
+    }
+    #contenedor-carrito{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        gap: 15px;
+    }
+    #contenedor-carrito div{
+        max-width: 90%;
+    }
+    .producto {
+        max-width: 100%;
+    }
+    nav {
+        gap: 0px;
+        font-size: 0.6rem;
+        padding: 0px;
+        
+    }
+    nav > * {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+    }
+    #toggle-theme{
+        max-width: 50px;
+        max-height: 50px;
+        font-size: 0.6rem;
+        padding: 0px;
+    }
+}
